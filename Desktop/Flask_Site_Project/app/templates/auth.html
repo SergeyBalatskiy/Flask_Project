@@ -2,6 +2,13 @@
 
 {% block body %}
 
-<h1>Тут будет поле для авторизации</h1>
+<div class="container mt-5">
+    <h1>Вход в аккаунт</h1>
+    <form method="post">
+        <input type="text" name="mail" id="mail" class="form-control" placeholder="Введите вашу почту"><br>
+        <input type="text" name="password" id="password" class="form-control" placeholder="Введите ваш пароль"><br>
+        <input type="submit" class="btn btn-success" value="Войти">
+    </form>
+</div>
 
 {% endblock %}

@@ -1,7 +1,9 @@
 # Тут для базы данных что то
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
+from flask_login import LoginManager
+from flask_login import UserMixin
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = (
@@ -9,6 +11,14 @@ app.config["SQLALCHEMY_DATABASE_URI"] = (
 )
 app.config["SECRET_KEY"] = "05a8fe372941bef498a572c53b6aa1df1c8d3e27"
 db = SQLAlchemy(app)
+login_manager = LoginManager(app)
+login_manager.init_app(app)
+login_manager.login_view = "authenitication.auth"
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return Users.query.get(int(user_id))
 
 
 @app.errorhandler(404)
@@ -17,15 +27,20 @@ def error_handler_http(error):
     return render_template("error_handler.html")
 
 
-class Users(db.Model):
+class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
     surname = db.Column(db.String(80), nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
     mail = db.Column(db.String(100), nullable=False)
     phone = db.Column(db.String(100), nullable=False)
-    type_of_user = db.Column(db.String(10), default = "user")
+    type_of_user = db.Column(db.String(10), default="user")
     date = db.Column(db.DateTime, default=datetime.utcnow)
+
+    @property
+    def is_active(self):
+        # Example: Only active if the user has verified their email
+        return self.mail
 
     def __repr__(self):
 

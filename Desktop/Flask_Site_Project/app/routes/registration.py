@@ -8,7 +8,7 @@ registration_bp = Blueprint("registration", __name__)
 @registration_bp.route("/create_account", methods=["POST", "GET"])
 def registration():
 
-    if "authorised" in session:
+    if "authorised" in session and session["authorised"] != None:
 
         return redirect(url_for("profile.profile_of_user", id=session["authorised"]))
 
@@ -33,8 +33,7 @@ def registration():
         try:
             db.session.add(new_user)
             db.session.commit()
-            session["authorised"] = new_user.id
-            return redirect(url_for("profile.profile_of_user", id=new_user.id))
+            return redirect(url_for("profile.profile_of_user"))
 
         except Exception as e:
 

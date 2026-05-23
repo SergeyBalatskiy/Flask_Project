@@ -1,19 +1,21 @@
 from flask import Blueprint, session, redirect, url_for, render_template
 from app.models import Users
+from flask_login import (
+    LoginManager,
+    UserMixin,
+    login_user,
+    logout_user,
+    login_required,
+    current_user,
+)
 
 profile = Blueprint("profile", __name__)
 
 
-@profile.route("/profile/<int:id>")
-def profile_of_user(id):
+@profile.route("/profile")
+@login_required
+def profile_of_user():
 
-    user_object = Users.query.get(id)
+    user_object = current_user
 
-    print(type(session["authorised"]), type((user_object.id)))
-
-    if user_object.id == session["authorised"]:
-
-        return render_template("profile.html", user_object=user_object)
-
-    else:
-        return redirect(url_for("authenitication.auth"))
+    return render_template("profile.html", user_object=user_object)
