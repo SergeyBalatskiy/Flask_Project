@@ -1,6 +1,6 @@
 # Тут для базы данных что то
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
+from datetime import datetime, timedelta
 from flask import Flask, render_template, url_for
 from flask_login import LoginManager
 from flask_login import UserMixin
@@ -10,10 +10,14 @@ app.config["SQLALCHEMY_DATABASE_URI"] = (
     "sqlite:///C:/Users/OS/Desktop/Flask_Site_Project/app/database/users.db"
 )
 app.config["SECRET_KEY"] = "05a8fe372941bef498a572c53b6aa1df1c8d3e27"
+app.config["SESSION_PERMANENT"] = False
+app.config["REMEMBER_COOKIE_DURATION"] = timedelta(days=2)
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 login_manager.init_app(app)
 login_manager.login_view = "authenitication.auth"
+login_manager.login_message = "Авторизируйтесь для доступа к закрытым страницам"
+login_manager.login_message_category = "warning"
 
 
 @login_manager.user_loader

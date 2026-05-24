@@ -1,4 +1,4 @@
-from flask import Blueprint, session, redirect, url_for, render_template
+from flask import Blueprint, session, redirect, url_for, render_template, flash
 from app.models import Users
 from flask_login import (
     LoginManager,
@@ -14,6 +14,7 @@ profile = Blueprint("profile", __name__)
 
 @profile.route("/profile")
 @login_required
+
 def profile_of_user():
 
     user_object = current_user

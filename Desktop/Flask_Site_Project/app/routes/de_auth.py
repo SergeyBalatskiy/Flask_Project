@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, session, redirect, url_for
+from flask import Blueprint, render_template, request, session, redirect, url_for, flash
 from flask_login import (
     LoginManager,
     UserMixin,
@@ -10,9 +10,9 @@ from flask_login import (
 
 de_auth = Blueprint("de_auth", __name__)
 
-
 @de_auth.route("/de_auth")
 @login_required
 def deauth():
     logout_user()
+    flash("Вы вышли из аккаунта", category="success")
     return redirect(url_for("authenitication.auth"))

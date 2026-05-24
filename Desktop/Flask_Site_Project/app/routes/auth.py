@@ -21,16 +21,22 @@ def auth():
         return redirect(url_for("profile.profile_of_user"))
 
     if request.method == "POST":
+        rm = True if request.form.get("remainme") else False
 
         mail_auth = request.form.get("mail")
-
         password_hash_auth = request.form.get("password")
 
         user = Users.query.filter_by(mail=mail_auth).first()
 
         if user and check_password_hash(user.password_hash, password_hash_auth):
-            login_user(user)
-            return redirect(url_for("profile.profile_of_user"))
+            login_user(user, remember=rm)
+
+            if not rm:
+                session.permanent = False
+
+            return redirect(
+                request.args.get("next") or url_for("profile.profile_of_user")
+            )
 
     else:
         return render_template("auth.html")

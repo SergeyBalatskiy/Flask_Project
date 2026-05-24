@@ -1,0 +1,56 @@
+.btn-danger {
+    padding: 0.5rem 1.25rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    background: #dc3545;
+    color: white;
+    display: inline-block;
+}
+
+.btn-danger:hover {
+    background: #79030f;
+}
+
+.btn-info {
+    padding: 0.5rem 1.25rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    background: #969696;
+    color: white;
+    display: inline-block;
+}
+
+.btn-info:hover {
+    background: #474747;
+}
+
+
+.flash {
+    padding: 10px;
+}
+
+.flash.success {
+    border: 1px solid #009a3b;
+    background: #00ff62
+}
+
+.flash.error {
+    border: 1px solid #ef0000;
+    background: #6e0000
+}
+
+.flash.warning {
+    border: 1px solid #ffea00;
+    color: #000000;
+    background: #c4b400
+}

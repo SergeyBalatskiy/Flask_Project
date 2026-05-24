@@ -4,9 +4,14 @@
 
 <div class="container mt-5">
     <h1>Вход в аккаунт</h1>
-    <form method="post">
+    {% for cat, msg in get_flashed_messages(True) %}
+    <div class="flash {{cat}}">{{msg}}</div>
+    {% endfor %}
+
+    <form action="" method="post">
         <input type="text" name="mail" id="mail" class="form-control" placeholder="Введите вашу почту"><br>
         <input type="text" name="password" id="password" class="form-control" placeholder="Введите ваш пароль"><br>
+        <input type="checkbox" name="remainme" /> Запомнить меня
         <input type="submit" class="btn btn-success" value="Войти">
     </form>
 </div>

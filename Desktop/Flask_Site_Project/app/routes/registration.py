@@ -1,6 +1,14 @@
 from flask import Blueprint, render_template, request, session, redirect, url_for
 from werkzeug.security import generate_password_hash
 from app.models import Users, db
+from flask_login import (
+    LoginManager,
+    UserMixin,
+    login_user,
+    logout_user,
+    login_required,
+    current_user,
+)
 
 registration_bp = Blueprint("registration", __name__)
 
@@ -8,9 +16,9 @@ registration_bp = Blueprint("registration", __name__)
 @registration_bp.route("/create_account", methods=["POST", "GET"])
 def registration():
 
-    if "authorised" in session and session["authorised"] != None:
+    if current_user.is_authenticated:
 
-        return redirect(url_for("profile.profile_of_user", id=session["authorised"]))
+        return redirect(url_for("profile.profile_of_user"))
 
     if request.method == "POST":
 
