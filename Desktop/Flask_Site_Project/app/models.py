@@ -1,4 +1,3 @@
-# Тут для базы данных что то
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timedelta
 from flask import Flask, render_template, url_for
@@ -13,9 +12,11 @@ app.config["SECRET_KEY"] = "05a8fe372941bef498a572c53b6aa1df1c8d3e27"
 app.config["SESSION_PERMANENT"] = False
 app.config["REMEMBER_COOKIE_DURATION"] = timedelta(days=2)
 
-app.config["MAX_CONTENT_LENGTH"] = 1024*1024
-app.config["UPLOAD_FOLDER"] = 'C:\Users\OS\Desktop\Flask_Site_Project\app\avatars_of_users'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+app.config["MAX_CONTENT_LENGTH"] = 1024 * 1024
+app.config["UPLOAD_FOLDER"] = (
+    r"C:\Users\OS\Desktop\Flask_Site_Project\app\avatars_of_users"
+)
+ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
 
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
@@ -44,7 +45,7 @@ class Users(UserMixin, db.Model):
     mail = db.Column(db.String(100), nullable=False)
     phone = db.Column(db.String(100), nullable=False)
     type_of_user = db.Column(db.String(10), default="user")
-    avatar = db.Column(db.BLOB, nullable=True)
+    avatar = db.Column(db.String(50), default="default.png")
     date = db.Column(db.DateTime, default=datetime.utcnow)
 
     @property
