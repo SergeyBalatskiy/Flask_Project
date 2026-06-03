@@ -45,8 +45,8 @@
 }
 
 .flash.error {
-    border: 1px solid #ef0000;
-    background: #6e0000
+    border: 1px solid #d00000;
+    background: #a81010
 }
 
 .flash.warning {

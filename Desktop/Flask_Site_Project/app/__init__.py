@@ -10,3 +10,4 @@ app.register_blueprint(registration_bp)
 app.register_blueprint(profile)
 app.register_blueprint(authenitication)
 app.register_blueprint(de_auth)
+

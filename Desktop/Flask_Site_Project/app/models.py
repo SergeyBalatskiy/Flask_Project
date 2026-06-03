@@ -12,7 +12,6 @@ app.config["SECRET_KEY"] = "05a8fe372941bef498a572c53b6aa1df1c8d3e27"
 app.config["SESSION_PERMANENT"] = False
 app.config["REMEMBER_COOKIE_DURATION"] = timedelta(days=2)
 
-app.config["MAX_CONTENT_LENGTH"] = 1024 * 1024
 app.config["UPLOAD_FOLDER"] = (
     r"C:\Users\OS\Desktop\Flask_Site_Project\app\avatars_of_users"
 )
