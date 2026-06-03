@@ -11,9 +11,13 @@ app.config["SQLALCHEMY_DATABASE_URI"] = (
 app.config["SECRET_KEY"] = "05a8fe372941bef498a572c53b6aa1df1c8d3e27"
 app.config["SESSION_PERMANENT"] = False
 app.config["REMEMBER_COOKIE_DURATION"] = timedelta(days=2)
-
 app.config["UPLOAD_FOLDER"] = (
     r"C:\Users\OS\Desktop\Flask_Site_Project\app\avatars_of_users"
+)
+app.config.update(
+    SESSION_COOKIE_SECURE=True,
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SAMESITE='Lax',
 )
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
 
@@ -29,6 +33,13 @@ login_manager.login_message_category = "warning"
 def load_user(user_id):
     return Users.query.get(int(user_id))
 
+@app.after_request
+def add_header(response):
+    response.headers['Content-Security-Policy'] = "default-src 'self'"
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers['X-Frame-Options'] = 'SAMEORIGIN'
+    response.headers['X-XSS-Protection'] = '1; mode=block'
+    return response
 
 @app.errorhandler(404)
 def error_handler_http(error):
