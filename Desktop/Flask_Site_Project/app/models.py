@@ -17,7 +17,7 @@ app.config["UPLOAD_FOLDER"] = (
 app.config.update(
     SESSION_COOKIE_SECURE=True,
     SESSION_COOKIE_HTTPONLY=True,
-    SESSION_COOKIE_SAMESITE='Lax',
+    SESSION_COOKIE_SAMESITE="Lax",
 )
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
 
@@ -35,10 +35,10 @@ def load_user(user_id):
 
 @app.after_request
 def add_header(response):
-    response.headers['Content-Security-Policy'] = "default-src 'self'"
-    response.headers['X-Content-Type-Options'] = 'nosniff'
-    response.headers['X-Frame-Options'] = 'SAMEORIGIN'
-    response.headers['X-XSS-Protection'] = '1; mode=block'
+    response.headers["Content-Security-Policy"] = "default-src 'self'"
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "SAMEORIGIN"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
     return response
 
 @app.errorhandler(404)
@@ -67,20 +67,21 @@ class Users(UserMixin, db.Model):
 
         return "<Article %r>" % self.id
 
-    class Questionnaire(db.Model):
-        id_of_user = db.Column(db.Integer, primary_key=True)
-        age = db.Column(db.Integer, nullable=False)
-        gender = db.Column(db.String(50), nullable=False)
-        height = db.Column(db.Float, nullable=False)
-        weight = db.Column(db.Float, nullable=False)
-        targer_weight = db.Column(db.Float, nullable=False)
-        target_of_training = db.Column(db.String(750), nullable=False)
-        experience_of_training = db.Column(db.Integer, nullable=False)
-        photo_of_target_body = db.Column(db.BLOB, nullable=False)
-        health_problems = db.Column(db.String(1000), nullable=False)
-        Report = db.Column(db.String(100), nullable=False)
-        user_date = db.Column(db.DateTime, default=datetime.utcnow)
 
-        def __repr__(self):
+class Questionnaire(db.Model):
+    id_of_user = db.Column(db.Integer, primary_key=True)
+    age = db.Column(db.Integer, nullable=False)
+    gender = db.Column(db.String(50), nullable=False)
+    height = db.Column(db.Float, nullable=False)
+    weight = db.Column(db.Float, nullable=False)
+    targer_weight = db.Column(db.Float, nullable=False)
+    target_of_training = db.Column(db.String(750), nullable=False)
+    experience_of_training = db.Column(db.Integer, nullable=False)
+    photo_of_target_body = db.Column(db.BLOB, nullable=False)
+    health_problems = db.Column(db.String(1000), nullable=False)
+    Report = db.Column(db.String(100), nullable=False)
+    user_date = db.Column(db.DateTime, default=datetime.utcnow)
 
-            return "<Article %r>" % self.id
+    def __repr__(self):
+
+        return "<Article %r>" % self.id

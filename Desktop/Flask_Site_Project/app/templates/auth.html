@@ -9,10 +9,13 @@
     {% endfor %}
 
     <form action="" method="post">
-        <input type="text" name="mail" id="mail" class="form-control" placeholder="Введите вашу почту"><br>
-        <input type="text" name="password" id="password" class="form-control" placeholder="Введите ваш пароль"><br>
-        <input type="checkbox" name="remainme" /> Запомнить меня
-        <input type="submit" class="btn btn-success" value="Войти">
+
+        {{ form.hidden_tag() }}
+        <p>{{ form.email.label() }} {{ form.email() }}
+        <p>{{ form.password.label() }} {{ form.password() }}
+        <p>{{ form.remember.label() }} {{ form.remember() }}
+        <p>{{ form.submit() }}
+
     </form>
 </div>
 
