@@ -23,6 +23,18 @@ import os
 profile = Blueprint("profile", __name__)
 
 
+@profile.route("/")
+@login_required
+def profile_of_user():
+    return render_template("profile.html")
+
+
+@profile.route("/show_profile")
+@login_required
+def show_profile_user():
+    # Что-то передается в HTML...
+    ...
+
 def allowed_file(filename):
     """Функция проверки расширения файла"""
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -83,7 +95,7 @@ def upload_avatar():
 
                 indx = name_image.find(".")
 
-                expansion = name_image[indx:]
+                expansion = name_image[indx:].lower()
 
                 obj_for_update = Users.query.get(current_user.id)
 
@@ -112,11 +124,9 @@ def upload_avatar():
 
             name_image = secure_filename(file.filename)
 
-            # Посмотреть какой файл загружается????
-
             indx = name_image.find(".")
 
-            expansion = name_image[indx:]
+            expansion = name_image[indx:].lower()
 
             filename_id = f"user_{current_user.id}{expansion}"
 
@@ -158,15 +168,6 @@ def upload_avatar():
             return redirect(url_for("profile.profile_of_user"))
     else:
         return redirect(url_for("profile.profile_of_user"))
-
-
-@profile.route("/profile")
-@login_required
-def profile_of_user():
-
-    print(current_user.avatar)
-
-    return render_template("profile.html")
 
 
 def load_image():

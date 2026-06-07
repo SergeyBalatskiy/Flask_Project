@@ -295,3 +295,11 @@ body {
         padding: 1rem;
     }
 }
+
+.form-contact .invalid {
+    background: #c50000;
+} 
+
+.form-contact .invalid-feedback {
+    color: #c82333
+}

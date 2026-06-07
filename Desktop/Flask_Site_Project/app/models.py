@@ -14,6 +14,9 @@ app.config["REMEMBER_COOKIE_DURATION"] = timedelta(days=2)
 app.config["UPLOAD_FOLDER"] = (
     r"C:\Users\OS\Desktop\Flask_Site_Project\app\avatars_of_users"
 )
+app.config["UPLOAD_FOLDER_TARGET_BODY"] = (
+    r"C:\Users\OS\Desktop\Flask_Site_Project\app\photo_of_target_body"
+)
 app.config.update(
     SESSION_COOKIE_SECURE=True,
     SESSION_COOKIE_HTTPONLY=True,
@@ -74,12 +77,13 @@ class Questionnaire(db.Model):
     gender = db.Column(db.String(50), nullable=False)
     height = db.Column(db.Float, nullable=False)
     weight = db.Column(db.Float, nullable=False)
-    targer_weight = db.Column(db.Float, nullable=False)
+    target_weight = db.Column(db.Float, nullable=False)
     target_of_training = db.Column(db.String(750), nullable=False)
     experience_of_training = db.Column(db.Integer, nullable=False)
+    active_in_the_day = db.Column(db.Strig(40), nullable = False)
     photo_of_target_body = db.Column(db.BLOB, nullable=False)
     health_problems = db.Column(db.String(1000), nullable=False)
-    Report = db.Column(db.String(100), nullable=False)
+    Report = db.Column(db.String, nullable=False)
     user_date = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):

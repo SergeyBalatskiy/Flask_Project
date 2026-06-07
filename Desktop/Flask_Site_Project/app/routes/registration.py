@@ -9,6 +9,7 @@ from flask_login import (
     login_required,
     current_user,
 )
+from app.forms import RegisterForm
 
 registration_bp = Blueprint("registration", __name__)
 
@@ -20,22 +21,18 @@ def registration():
 
         return redirect(url_for("profile.profile_of_user"))
 
-    if request.method == "POST":
+    form = RegisterForm()
 
-        print(f"Все данные формы:{request.form}")
+    if form.validate_on_submit():
 
-        name = request.form["name"]
-        surname = request.form["surname"]
-        password_hash = generate_password_hash(request.form["password"])
-        mail = request.form["mail"]
-        phone = request.form["phone"]
-
+        password_hash_regist = generate_password_hash(form.password_hash.data)
         new_user = Users(
-            name=name,
-            surname=surname,
-            password_hash=password_hash,
-            mail=mail,
-            phone=phone,
+            name=form.name.data,
+            surname=form.surname.data,
+            password_hash=password_hash_regist,
+            mail=form.mail.data,
+            phone=form.phone.data,
+            avatar = "default.png"
         )
 
         try:
@@ -48,5 +45,7 @@ def registration():
             print("Ошибка:", e)
             return "При обработке произошла ошибка. Возможно, вы некорректно ввели требуемые данные! Попробуйте повторить еще раз."
 
-    else:
-        return render_template("registration.html")
+    
+    return render_template("registration.html", form = form)
+
+

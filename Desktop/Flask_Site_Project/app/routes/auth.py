@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, session, redirect, url_for
+from flask import Blueprint, render_template, request, session, redirect, url_for, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.models import Users
 from flask_login import (
@@ -9,7 +9,7 @@ from flask_login import (
     login_required,
     current_user,
 )
-from app.forms_login import LoginForm
+from app.forms import LoginForm
 
 authenitication = Blueprint("authenitication", __name__)
 
@@ -38,25 +38,9 @@ def auth():
             return redirect(
                 request.args.get("next") or url_for("profile.profile_of_user")
             )
+        else:
+            flash("Введена неверная пара почта/пароль!", category="error")
+            return redirect(url_for("authenitication.auth"))
 
     return render_template("auth.html", form = form)
 
-    if request.method == "POST":
-
-        mail_auth = request.form.get("mail")
-        password_hash_auth = request.form.get("password")
-
-        user = Users.query.filter_by(mail=mail_auth).first()
-
-        if user and check_password_hash(user.password_hash, password_hash_auth):
-            login_user(user, remember=rm)
-
-            if not rm:
-                session.permanent = False
-
-            return redirect(
-                request.args.get("next") or url_for("profile.profile_of_user")
-            )
-
-    else:
-        return render_template("auth.html")

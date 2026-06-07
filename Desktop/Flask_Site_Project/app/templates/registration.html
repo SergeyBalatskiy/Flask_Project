@@ -4,13 +4,26 @@
 
 <div class="container mt-5">
     <h1>Cоздание аккаунта</h1>
-    <form method="post">
-        <input type="text" name="name" id="name" class="form-control" placeholder="Введите ваше имя"><br>
-        <input type="text" name="surname" id="surname" class="form-control" placeholder="Введите вашу фамилию"><br>
-        <input type="text" name="password" id="password" class="form-control" placeholder="Введите ваш пароль"><br>
-        <input type="text" name="mail" id="mail" class="form-control" placeholder="Введите вашу почту"><br>
-        <input type="text" name="phone" id="phone" class="form-control" placeholder="Введите ваш номер телефона"><br>
-        <input type="submit" class="btn btn-success" value="Создать аккаунт">
+
+    <form action="" method="post" novalidate class="form-contact">
+
+        {{ form.hidden_tag() }}
+
+        {% for field in form if field.name not in ['csrf_token', 'submit'] -%}
+        <p>{{ field.label() }}</p>
+        {% if field.errors %}
+        {{ field(class="invalid") }}
+        <span class="invalid-feedback">
+            {% for e in field.errors %}
+            {{ e }}
+            {% endfor %}
+        </span>
+        {% else %}
+        {{ field() }}
+        {% endif %}
+        {% endfor %}
+
+        <p>{{ form.submit(class = "btn btn-success") }}
     </form>
 
 </div>
