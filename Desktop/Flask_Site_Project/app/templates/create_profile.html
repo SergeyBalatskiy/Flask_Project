@@ -8,7 +8,7 @@
     <div class="flash {{cat}}">{{msg}}</div>
     {% endfor %}
 
-    <form action="" method="post" novalidate class="form-contact">
+    <form action="" method="POST" novalidate class="form-contact" enctype="multipart/form-data">
 
         {{ form.hidden_tag() }}
 

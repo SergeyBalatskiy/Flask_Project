@@ -32,8 +32,14 @@ def profile_of_user():
 @profile.route("/show_profile")
 @login_required
 def show_profile_user():
-    # Что-то передается в HTML...
-    ...
+    info = []
+
+    try:
+        info = Users.query.get(current_user.id)
+    except Exception as e:
+        print(f"Ошибка:{e}")
+
+    return render_template("show_profile.html", list = info)    
 
 def allowed_file(filename):
     """Функция проверки расширения файла"""
@@ -74,15 +80,6 @@ def upload_avatar():
         if file.filename == "":
 
             flash("Ошибка загрузки файла", category="error")
-            return redirect(url_for("profile.profile_of_user"))
-
-        file_data = file.read()
-
-        if len(file_data) > 1024 * 1024:
-            flash(
-                "Разрешение файла слижком большое! Необходимо, чтобы размер файла был не больше 1 МБ!",
-                category="error",
-            )
             return redirect(url_for("profile.profile_of_user"))
 
         if "file" and allowed_file(file.filename):

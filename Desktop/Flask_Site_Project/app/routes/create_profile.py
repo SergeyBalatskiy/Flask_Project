@@ -22,11 +22,35 @@ def create_profile():
 
     if form.validate_on_submit():
         files_filenames = []
+
+        if not form.photo_of_target_body.data:
+            flash("Загрузите хотя бы одно фото", category="error")
+            return redirect(url_for("create_profile.create_profile"))
+
+        upload_path = os.path.join(app.config["UPLOAD_FOLDER_TARGET_BODY"], str(current_user.id))
+
+        try:
+            os.makedirs(upload_path)
+        except Exception as e:
+            print(e)
+            flash("Возникла непредвиденная ошибка при попытке сохранения фото.", category="error")
+            return redirect(url_for("create_profile.create_profile"))
+            
         for file in form.photo_of_target_body.data:
-            file_filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config["UPLOAD_FOLDER_TARGET_BODY"]), file_filename)
-            files_filenames.append(file_filename)
-        # И ПОТОМ КОНЕЧНЫЙ СПИСОК МОЖНО БУДЕТ ДОБАВИТЬ В САМУ БД, А ПОТОМ УЖЕ ИЗ этого брать все названия фото и вставлять в анкету!
+            if file and file.filename:
+                file_filename = secure_filename(file.filename)
+                file_path = os.path.join(upload_path, file_filename)
+                file.save(file_path)
+                files_filenames.append(file_filename)
+            else:
+                flash("Обнаружен пустой файл", category="error")
+                return redirect(url_for("create_profile.create_profile"))
+            
+        if not files_filenames:
+            flash("Не удалось сохранить ни одного фото", category="error")
+            return redirect(url_for("create_profile.create_profile"))
+        
+        photos_lst = ", ".join(files_filenames)
 
         create_quest = Questionnaire(
                 id_of_user = current_user.id,
@@ -38,17 +62,16 @@ def create_profile():
                 target_of_training = form.target_of_training.data, 
                 experience_of_training = form.experience_of_training.data,
                 active_in_the_day = form.active_in_the_day.data,
-                photo_of_target_body = form.photo_of_target_body.data,
+                photo_of_target_body = photos_lst,
                 health_problems = form.health_problems.data,
                 Report = form.Report.data
                 )
         try:
             db.session.add(create_quest)
             db.session.commit()
-            return redirect(url_for("profile.profile_of_user"))
+            return redirect(url_for("profile.show_profile_user"))
 
         except Exception as e:
-
             print("Ошибка:", e)
             return "При обработке произошла ошибка. Возможно, вы некорректно ввели требуемые данные! Попробуйте повторить еще раз."
 

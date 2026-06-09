@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, BooleanField, PasswordField, FileField, MultipleFileField
-from wtforms.validators import DataRequired, Email, Length, EqualTo, FileRequired, FileAllowed
+from wtforms.validators import DataRequired, Email, Length, EqualTo
+from flask_wtf.file import FileAllowed
 
 class LoginForm(FlaskForm):
     email = StringField("Email: ", validators=[Email("Некорректный email")])
@@ -29,7 +30,7 @@ class AddProfile(FlaskForm):
     target_weight = StringField("Целевой вес: ", validators=[DataRequired()])
     target_of_training = StringField("Цель тренировок: ", validators=[DataRequired()])
     active_in_the_day = StringField("Активность в течение дня: ", validators=[DataRequired()])
-    photo_of_target_body = MultipleFileField("Prekes nuotrauka", validators=[FileAllowed(["jpeg", "png", "jpg"])])
+    photo_of_target_body = MultipleFileField("Фото и уровень жира (текущая и желаемая форма)", validators=[DataRequired(), FileAllowed(["jpeg", "png", "jpg"])])
     health_problems = StringField("Проблемы со здоровьем: ", validators=[DataRequired()])
     Report = StringField("Отчет: ", validators=[DataRequired()])
     submit = SubmitField("Создать анкету") 

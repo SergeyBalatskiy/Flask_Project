@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import ForeignKey
 from datetime import datetime, timedelta
 from flask import Flask, render_template, url_for
 from flask_login import LoginManager
@@ -17,6 +18,7 @@ app.config["UPLOAD_FOLDER"] = (
 app.config["UPLOAD_FOLDER_TARGET_BODY"] = (
     r"C:\Users\OS\Desktop\Flask_Site_Project\app\photo_of_target_body"
 )
+app.config['MAX_CONTENT_LENGTH'] = 8 * 1024 * 1024
 app.config.update(
     SESSION_COOKIE_SECURE=True,
     SESSION_COOKIE_HTTPONLY=True,
@@ -61,6 +63,8 @@ class Users(UserMixin, db.Model):
     avatar = db.Column(db.String(50), default="default.png")
     date = db.Column(db.DateTime, default=datetime.utcnow)
 
+    pr = db.relationship("Questionnaire", backref = "users", uselist = False)
+
     @property
     def is_active(self):
         # Example: Only active if the user has verified their email
@@ -72,7 +76,8 @@ class Users(UserMixin, db.Model):
 
 
 class Questionnaire(db.Model):
-    id_of_user = db.Column(db.Integer, primary_key=True)
+    id_of_user = db.Column(db.Integer, ForeignKey('users.id'))
+    pr_key = db.Column(db.Integer, primary_key=True)
     age = db.Column(db.Integer, nullable=False)
     gender = db.Column(db.String(50), nullable=False)
     height = db.Column(db.Float, nullable=False)
@@ -80,8 +85,8 @@ class Questionnaire(db.Model):
     target_weight = db.Column(db.Float, nullable=False)
     target_of_training = db.Column(db.String(750), nullable=False)
     experience_of_training = db.Column(db.Integer, nullable=False)
-    active_in_the_day = db.Column(db.Strig(40), nullable = False)
-    photo_of_target_body = db.Column(db.BLOB, nullable=False)
+    active_in_the_day = db.Column(db.String(40), nullable = False)
+    photo_of_target_body = db.Column(db.String, nullable=False)
     health_problems = db.Column(db.String(1000), nullable=False)
     Report = db.Column(db.String, nullable=False)
     user_date = db.Column(db.DateTime, default=datetime.utcnow)
