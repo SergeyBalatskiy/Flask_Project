@@ -8,6 +8,7 @@ from flask_login import (
     login_required,
     current_user,
 )
+from PIL import Image
 from app.forms import AddProfile
 from werkzeug.utils import secure_filename
 import os
@@ -21,34 +22,52 @@ def create_profile():
     form = AddProfile()
 
     if form.validate_on_submit():
-        files_filenames = []
 
-        if not form.photo_of_target_body.data:
+        real_files = []
+
+        for f in form.photo_of_target_body.data:
+            if f and f.filename:
+                real_files.append(f)
+
+        if not real_files:
             flash("Загрузите хотя бы одно фото", category="error")
-            return redirect(url_for("create_profile.create_profile"))
+            return render_template("create_profile.html", form=form)
+
+        for check_file in real_files:
+            try:
+                with Image.open(check_file) as img:
+                    img.verify()
+                check_file.seek(0)
+            except:
+                check_name = secure_filename(check_file.filename)
+                flash(f"Произошла ошибка при попытке проверить файл {check_name} на целостность/коректность!", category="error")
+                return render_template("create_profile.html", form = form)
 
         upload_path = os.path.join(app.config["UPLOAD_FOLDER_TARGET_BODY"], str(current_user.id))
 
         try:
-            os.makedirs(upload_path)
+            os.makedirs(upload_path, exist_ok=True)
         except Exception as e:
             print(e)
             flash("Возникла непредвиденная ошибка при попытке сохранения фото.", category="error")
-            return redirect(url_for("create_profile.create_profile"))
-            
-        for file in form.photo_of_target_body.data:
-            if file and file.filename:
-                file_filename = secure_filename(file.filename)
-                file_path = os.path.join(upload_path, file_filename)
+            return render_template("create_profile.html", form=form)
+
+        files_filenames = []
+
+        for file in real_files:
+            file_filename = secure_filename(file.filename)
+            file_path = os.path.join(upload_path, file_filename)
+            try:
                 file.save(file_path)
-                files_filenames.append(file_filename)
-            else:
+            except:
                 flash("Обнаружен пустой файл", category="error")
-                return redirect(url_for("create_profile.create_profile"))
+                return render_template("create_profile.html", form = form)
             
+            files_filenames.append(file_filename)
+
         if not files_filenames:
             flash("Не удалось сохранить ни одного фото", category="error")
-            return redirect(url_for("create_profile.create_profile"))
+            return render_template("create_profile.html", form = form)
         
         photos_lst = ", ".join(files_filenames)
 
@@ -76,4 +95,4 @@ def create_profile():
             return "При обработке произошла ошибка. Возможно, вы некорректно ввели требуемые данные! Попробуйте повторить еще раз."
 
     
-    return render_template("registration.html", form = form)
+    return render_template("create_profile.html", form = form)
