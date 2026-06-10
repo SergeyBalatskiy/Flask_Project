@@ -3,23 +3,22 @@
 {% block body %}
 
 <ul>
-    {% for u in list %}
     <li>
-        <p>id: {{u.id}}</p>
-        <p>Имя: {{u.name}}</p>
-        <p>Фамилия: {{u.surname}}</p>
-        <p>Возраст: {{u.age}}</p>
-        <p>Пол: {{u.gender}}</p>
-        <p>Рост: {{u.height}}</p>
-        <p>Вес: {{u.weight}}</p>
-        <p>Целевой вес: {{u.target_weight}}</p>
-        <p>Цель тренировок: {{u.target_of_training}}</p>
-        <p>Опыт тренировок: {{u.experience_of_training}}</p>
-        <p>Активность в течение дня: {{u.active_in_the_day}}</p>
+        <p>id: {{list.id}}</p>
+        <p>Имя: {{list.name}}</p>
+        <p>Фамилия: {{list.surname}}</p>
+        <p>Возраст: {{quest_list.age}}</p>
+        <p>Пол: {{quest_list.gender}}</p>
+        <p>Рост: {{quest_list.height}}</p>
+        <p>Вес: {{quest_list.weight}}</p>
+        <p>Целевой вес: {{quest_list.target_weight}}</p>
+        <p>Цель тренировок: {{quest_list.target_of_training}}</p>
+        <p>Опыт тренировок: {{quest_list.experience_of_training}}</p>
+        <p>Активность в течение дня: {{quest_list.active_in_the_day}}</p>
         <p>Фото и уровень жира (текущая и желаемая форма):</p>
-        <p>Проблемы со здоровьем: {{u.health_problems}}</p>
-        <p>Отчет: {{u.Report}}</p>
-        <p>Дата создания/редактирования анкеты: {{u.user_date}}</p>
+        <p>Проблемы со здоровьем: {{quest_list.health_problems}}</p>
+        <p>Отчет: {{quest_list.Report}}</p>
+        <p>Дата создания/редактирования анкеты: {{quest_list.user_date.strftime("%d.%m.%y, %H:%M")}}</p>
 
     </li>
 </ul>

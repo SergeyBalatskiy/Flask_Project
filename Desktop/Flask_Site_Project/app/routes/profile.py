@@ -8,7 +8,7 @@ from flask import (
     request,
     make_response,
 )
-from app.models import ALLOWED_EXTENSIONS, app, Users, db
+from app.models import ALLOWED_EXTENSIONS, app, Users, db, Questionnaire
 from flask_login import (
     LoginManager,
     UserMixin,
@@ -37,11 +37,14 @@ def show_profile_user():
 
     try:
         info = Users.query.get(current_user.id)
+        info_quest = info.pr
+        return render_template("show_profile.html", list = info, quest_list = info_quest)   
     except Exception as e:
         print(f"Ошибка:{e}")
-
-    return render_template("show_profile.html", list = info)    
-
+        print("💚", info)
+        print("💚", type(info))
+        return f"{e}"
+     
 def allowed_file(filename):
     """Функция проверки расширения файла"""
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
