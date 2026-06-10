@@ -10,7 +10,7 @@ from flask_login import (
 
 de_auth = Blueprint("de_auth", __name__)
 
-@de_auth.route("/de_auth")
+@de_auth.route("/logout_user")
 @login_required
 def deauth():
     logout_user()

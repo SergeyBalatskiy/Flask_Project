@@ -19,6 +19,7 @@ from flask_login import (
 )
 from werkzeug.utils import secure_filename
 import os
+from PIL import Image
 
 profile = Blueprint("profile", __name__)
 
@@ -81,7 +82,16 @@ def upload_avatar():
 
             flash("Ошибка загрузки файла", category="error")
             return redirect(url_for("profile.profile_of_user"))
-
+        
+        try:
+            with Image.open(file) as img:
+                img.verify()
+            file.seek(0)
+        except:
+            check_name = secure_filename(file.filename)
+            flash(f"Произошла ошибка при попытке проверить файл {check_name} на целостность/коректность!", category="error")
+            return redirect(url_for("profile.profile_of_user"))
+        
         if "file" and allowed_file(file.filename):
 
             file.seek(0)
@@ -127,18 +137,9 @@ def upload_avatar():
 
             filename_id = f"user_{current_user.id}{expansion}"
 
-            print(f"💥{expansion}💥")
 
-            print(f"✅{filename_id}✅")
-
-            if (
-                expansion in current_user.avatar
-            ):  # Срабатывает именно это условие почему то!!!
+            if (expansion in current_user.avatar):
                 print(expansion in current_user.avatar)
-
-                print(f"💥{expansion}💥")
-
-                print(f"✅{current_user.avatar}✅")
 
                 file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename_id))
 

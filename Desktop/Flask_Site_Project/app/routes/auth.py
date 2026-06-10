@@ -14,7 +14,7 @@ from app.forms import LoginForm
 authenitication = Blueprint("authenitication", __name__)
 
 
-@authenitication.route("/auth", methods=["POST", "GET"])
+@authenitication.route("/login", methods=["POST", "GET"])
 def auth():
 
     if current_user.is_authenticated:
@@ -40,7 +40,7 @@ def auth():
             )
         else:
             flash("Введена неверная пара почта/пароль!", category="error")
-            return redirect(url_for("authenitication.auth"))
+            return render_template("auth.html", form = form)
 
     return render_template("auth.html", form = form)
 
