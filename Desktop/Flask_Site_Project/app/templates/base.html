@@ -10,30 +10,32 @@
     {% block extra_css %}{% endblock %}
 </head>
 
-<body>
+<body class="{% block body_class %}{% endblock %}">
     <!-- Шапка сайта -->
-    <header class="header">
-        <div class="header-container">
+    <header class="container">
+        <span class="logo">sport</span>
+        <nav>
+            <ul>
 
-            <nav class="nav-links">
-
-                <!-- Блок для дополнительных ссылок (можно переопределить) -->
-                {% block extra_nav %}{% endblock %}
-            </nav>
-
-            <div class="auth-buttons">
                 {% if current_user.is_authenticated %}
-                <!-- Пользователь авторизован -->
                 <a href="{{ url_for('profile.profile_of_user') }}" class="btn btn-info">Профиль</a>
+                <li class="active"><a href="{{ url_for('main_page.example_profile') }}">Пример анкеты</li>
+                <li class="active"><a href="{{ url_for('de_auth.deauth') }}">Выйти</li>
+                <li class="btn"><a href="{{ url_for('about_site.about_site') }}">О сайте</li>
 
                 {% else %}
-                <!-- Пользователь не авторизован -->
-                <a href="{{ url_for('registration.registration') }}" class="btn btn-success">Создать аккаунт</a>
-
+                <!--<li class="active"><a href="{{url_for('main_page.example_profile')}}">Создание анкеты</li>-->
+                <li class="active"><a href="{{url_for('registration.registration')}}">Регистрация</li>
+                <li class="active"><a href="{{ url_for('main_page.example_profile') }}">Пример анкеты</li>
+                <li class="active"><a href="{{url_for('authenitication.auth')}}">Войти</li>
+                <li class="btn"><a href="{{ url_for('about_site.about_site') }}">О сайте</li>
                 {% endif %}
-            </div>
-        </div>
+
+            </ul>
+        </nav>
+
     </header>
+
 
     <main class="container">
         {% block body %}
@@ -43,12 +45,6 @@
         {% endblock %}
     </main>
 
-    <!-- Футер -->
-    <footer class="footer">
-        <p>© 2026 Моя анкета. Все права защищены.</p>
-    </footer>
-
-    {% block extra_js %}{% endblock %}
 </body>
 
 </html>
