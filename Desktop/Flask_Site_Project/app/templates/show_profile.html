@@ -1,26 +1,32 @@
 {% extends "base.html" %}
 
+{% block body_class %}registration-bg{% endblock %}
+
 {% block body %}
 
-<ul>
-    <li>
-        <p>id: {{list.id}}</p>
-        <p>Имя: {{list.name}}</p>
-        <p>Фамилия: {{list.surname}}</p>
-        <p>Возраст: {{quest_list.age}}</p>
-        <p>Пол: {{quest_list.gender}}</p>
-        <p>Рост: {{quest_list.height}}</p>
-        <p>Вес: {{quest_list.weight}}</p>
-        <p>Целевой вес: {{quest_list.target_weight}}</p>
-        <p>Цель тренировок: {{quest_list.target_of_training}}</p>
-        <p>Опыт тренировок: {{quest_list.experience_of_training}}</p>
-        <p>Активность в течение дня: {{quest_list.active_in_the_day}}</p>
-        <p>Фото и уровень жира (текущая и желаемая форма):</p>
-        <p>Проблемы со здоровьем: {{quest_list.health_problems}}</p>
-        <p>Отчет: {{quest_list.Report}}</p>
-        <p>Дата создания/редактирования анкеты: {{quest_list.user_date.strftime("%d.%m.%y, %H:%M")}}</p>
+<div class="exampl">
+    <div class="exampl--info">
+        <ul>
+            <li>
+                <p>id: {{list.id}}</p>
+                <p>Имя: {{list.name}}</p>
+                <p>Фамилия: {{list.surname}}</p>
+                <p>Возраст: {{quest_list.age}}</p>
+                <p>Пол: {{quest_list.gender}}</p>
+                <p>Рост: {{quest_list.height}}</p>
+                <p>Вес: {{quest_list.weight}}</p>
+                <p>Целевой вес: {{quest_list.target_weight}}</p>
+                <p>Цель тренировок: {{quest_list.target_of_training}}</p>
+                <p>Опыт тренировок: {{quest_list.experience_of_training}}</p>
+                <p>Активность в течение дня: {{quest_list.active_in_the_day}}</p>
+                <p>Фото и уровень жира (текущая и желаемая форма):</p>
+                <p>Проблемы со здоровьем: {{quest_list.health_problems}}</p>
+                <p>Комментарий: {{quest_list.Report}}</p>
+                <p>Дата создания/редактирования анкеты: {{quest_list.user_date.strftime("%d.%m.%y, %H:%M")}}</p>
 
-    </li>
-</ul>
+            </li>
+        </ul>
+    </div>
+</div>
 
 {% endblock %}

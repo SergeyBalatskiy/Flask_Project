@@ -29,5 +29,5 @@ class AddProfile(FlaskForm):
     active_in_the_day = StringField("Активность в течение дня: ", validators=[DataRequired(message='Поле "Активность в течение дня" не должно быть пустым!')])
     photo_of_target_body = MultipleFileField("Фото и уровень жира (текущая и желаемая форма)", validators=[DataRequired(message='Поле "Фото и уровень жира" не должно быть пустым!'), FileAllowed(["jpeg", "png", "jpg"], message = 'Необходимо загрузить фото в формате: "jpeg", "png", "jpg"')])
     health_problems = StringField("Проблемы со здоровьем: ", validators=[DataRequired(message='Поле "Проблемы со здоровьем" не должно быть пустым!')])
-    Report = StringField("Отчет: ")
+    Report = StringField("Комментарий: ")
     submit = SubmitField("Создать анкету") 

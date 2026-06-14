@@ -73,6 +73,7 @@ header {
     background-color: #000;
     padding: 20px 0 43px 0;
     width: 100%;
+    border-bottom: 3px solid rgb(255, 136, 0);
 }
 
 header .logo {
@@ -134,13 +135,16 @@ header nav ul li.btn a:hover {
 
 .hero {
     padding: 270px 0 100px 0;
-    margin-left: -86px;
+    margin-left: 50px;
+    margin-top: -30px;
 }
 
 .hero--info {
     width: 800px;
     background: rgba(0, 0, 0, 0.653);
     padding: 45px;
+    border-radius: 20px;
+    border: 3px solid rgb(255, 136, 0);
 }
 
 .hero--info h2 {
@@ -198,6 +202,7 @@ header nav ul li.btn a:hover {
     padding: 40px;
     border-radius: 20px;
     margin-top: -80px;
+    border: 3px solid rgb(255, 136, 0);
 }
 
 .reg--info p {
@@ -251,6 +256,7 @@ header nav ul li.btn a:hover {
 
 .reg--info h1 {
     text-align: center;
+    font-size: 31px;
 }
 
 .reg--info p:last-of-type {
@@ -267,4 +273,48 @@ header nav ul li.btn a:hover {
     font-size: 12px;
     display: block;
     margin-top: 5px;
+}
+
+body.example-bg {
+    background-image: url('/static/img_for_site/stadium.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+.exampl {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 100px);
+    width: 100%;
+    flex-direction: column;
+    position: relative;
+}
+
+.exampl--info {
+    min-width: 400px;
+    background: rgba(0, 0, 0, 0.75);
+    padding: 40px;
+    border-radius: 20px;
+    font-size: 20px;
+    border: 3px solid rgb(255, 136, 0);
+}
+
+.exampl--info h1 {
+    text-align: center;
+    font-size: 30px;
+    color: #fff;
+    font-weight: 700;
+    padding-bottom: 23px;
+}
+
+.exampl--info .orange-text {
+    color: #DC7000;
+}
+
+.exampl--info p {
+    line-height: 1.5em;
+    padding: 8px;
 }

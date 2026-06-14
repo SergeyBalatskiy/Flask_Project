@@ -1,24 +1,26 @@
 {% extends "base.html" %}
 
+{% block body_class %}example-bg{% endblock %}
+
 {% block body %}
 
-<div>
-
-    <h1>Здесь вы можете ознакомиться с тем, как выглядит анкета пользователя:</h1>
-    <p>Имя: Игорь</p>
-    <p>Фамилия: Балакирев</p>
-    <p>Возраст: 19 лет</p>
-    <p>Пол: Мужской</p>
-    <p>Рост: 185 см</p>
-    <p>Вес: 80 кг</p>
-    <p>Целевой вес: 75 кг</p>
-    <p>Цель тренировок: Убрать подкожный жир</p>
-    <p>Опыт тренировок: 7 лет</p>
-    <p>Активность в течение дня: Высокая</p>
-    <p>Фото и уровень жира (текущая и желаемая форма):</p>
-    <p>Проблемы со здоровьем: Диабет 2 типа</p>
-    <p>Отчет: -</p>
-
+<div class="exampl">
+    <div class="exampl--info">
+        <h1>Шаблон анкеты:</h1>
+        <p><span class="orange-text">Имя:</span> Игорь</p>
+        <p><span class="orange-text">Фамилия:</span> Балакирев</p>
+        <p><span class="orange-text">Возраст:</span> 19 лет</p>
+        <p><span class="orange-text">Пол:</span> Мужской</p>
+        <p><span class="orange-text">Рост:</span> 185 см</p>
+        <p><span class="orange-text">Вес:</span> 80 кг</p>
+        <p><span class="orange-text">Целевой вес:</span> 75 кг</p>
+        <p><span class="orange-text">Цель тренировок:</span> Убрать подкожный жир</p>
+        <p><span class="orange-text">Опыт тренировок:</span> 7 лет</p>
+        <p><span class="orange-text">Активность в течение дня:</span> Высокая</p>
+        <p><span class="orange-text">Фото и уровень жира (текущая и желаемая форма):</span></p>
+        <p><span class="orange-text">Проблемы со здоровьем:</span> Травма ахила</p>
+        <p><span class="orange-text">Комментарий:</span></p>
+    </div>
 </div>
 
 {% endblock %}
