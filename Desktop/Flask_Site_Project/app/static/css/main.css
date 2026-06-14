@@ -74,6 +74,7 @@ header {
     padding: 20px 0 43px 0;
     width: 100%;
     border-bottom: 3px solid rgb(255, 136, 0);
+    position: relative;
 }
 
 header .logo {
@@ -317,4 +318,35 @@ body.example-bg {
 .exampl--info p {
     line-height: 1.5em;
     padding: 8px;
+}
+
+.verticalLine {
+    position: absolute;
+    border-left: 110px solid rgb(255, 136, 0);
+    height: 40px;
+    display: inline-block;
+    padding-bottom: 60px;
+    right: 1900px;
+    top: -37px;
+    transform: skew(-60deg)
+}
+
+.verticalLine3 {
+    position: absolute;
+    border-left: 110px solid rgb(255, 136, 0);
+    height: 31px;
+    display: inline-block;
+    top: 33px;
+    right: 2145px;
+    transform: skew(-60deg)
+}
+
+.verticalLine2 {
+    position: absolute;
+    border-left: 110px solid rgb(255, 136, 0);
+    height: 100px;
+    top: -69px;
+    display: inline-block;
+    right: 1660px;
+    transform: skew(-60deg)
 }
