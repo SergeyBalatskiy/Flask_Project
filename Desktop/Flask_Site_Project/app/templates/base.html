@@ -12,39 +12,32 @@
 
 <body class="{% block body_class %}{% endblock %}">
     <!-- Шапка сайта -->
-    <header class="container">
-        <span class="logo">sport</span>
-        <nav>
-            <ul>
-
-                {% if current_user.is_authenticated %}
-                <a href="{{ url_for('profile.profile_of_user') }}" class="btn btn-info">Профиль</a>
-                <li class="active"><a href="{{ url_for('main_page.example_profile') }}">Пример анкеты</li>
-                <li class="active"><a href="{{ url_for('de_auth.deauth') }}">Выйти</li>
-                <li class="btn"><a href="{{ url_for('about_site.about_site') }}">О сайте</li>
-
-                {% else %}
-                <!--<li class="active"><a href="{{url_for('main_page.example_profile')}}">Создание анкеты</li>-->
-                <li class="active"><a href="{{url_for('registration.registration')}}">Регистрация</li>
-                <li class="active"><a href="{{ url_for('main_page.example_profile') }}">Пример анкеты</li>
-                <li class="active"><a href="{{url_for('authenitication.auth')}}">Войти</li>
-                <li class="btn"><a href="{{ url_for('about_site.about_site') }}">О сайте</li>
-                {% endif %}
-
-            </ul>
-        </nav>
-
+    <header>
+        <div class="container">
+            <span class="logo"></span>
+            <nav>
+                <ul>
+                    {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('profile.profile_of_user') }}" class="btn btn-info">Профиль</a></li>
+                    <li class="active"><a href="{{ url_for('main_page.example_profile') }}">Пример анкеты</a></li>
+                    <li class="active"><a href="{{ url_for('de_auth.deauth') }}">Выйти</a></li>
+                    <li class="btn"><a href="{{ url_for('about_site.about_site') }}">О сайте</a></li>
+                    {% else %}
+                    <li class="active"><a href="{{ url_for('registration.registration') }}">Регистрация</a></li>
+                    <li class="active"><a href="{{ url_for('main_page.example_profile') }}">Пример анкеты</a></li>
+                    <li class="active"><a href="{{ url_for('authenitication.auth') }}">Войти</a></li>
+                    <li class="btn"><a href="{{ url_for('about_site.about_site') }}">О сайте</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
     </header>
-
 
     <main class="container">
         {% block body %}
-
         <!-- Основной контент -->
-
         {% endblock %}
     </main>
-
 </body>
 
 </html>

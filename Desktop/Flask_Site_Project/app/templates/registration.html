@@ -1,31 +1,30 @@
 {% extends "base.html" %}
 
+{% block body_class %}registration-bg{% endblock %}
+
 {% block body %}
 
-<div class="container mt-5">
-    <h1>Cоздание аккаунта</h1>
-
-    <form action="" method="post" novalidate class="form-contact">
-
-        {{ form.hidden_tag() }}
-
-        {% for field in form if field.name not in ['csrf_token', 'submit'] -%}
-        <p>{{ field.label() }}</p>
-        {% if field.errors %}
-        {{ field(class="invalid") }}
-        <span class="invalid-feedback">
-            {% for e in field.errors %}
-            {{ e }}
+<div class="reg">
+    <div class="reg--info">
+        <h1>Создание аккаунта</h1>
+        <form action="" method="post" novalidate class="form-contact">
+            {{ form.hidden_tag() }}
+            {% for field in form if field.name not in ['csrf_token', 'submit'] -%}
+            <p>{{ field.label() }}</p>
+            {% if field.errors %}
+            {{ field(class="invalid") }}
+            <span class="invalid-feedback">
+                {% for e in field.errors %}
+                {{ e }}
+                {% endfor %}
+            </span>
+            {% else %}
+            {{ field() }}
+            {% endif %}
             {% endfor %}
-        </span>
-        {% else %}
-        {{ field() }}
-        {% endif %}
-        {% endfor %}
-
-        <p>{{ form.submit(class = "btn btn-success") }}
-    </form>
-
+            <p>{{ form.submit(class = "btn btn-success") }}
+        </form>
+    </div>
 </div>
 
 {% endblock %}
