@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block body_class %}pr-bg{% endblock %}
+
 {% block body %}
 
 <div class="profile-ava"><img src="{{url_for('profile.show_avatar')}}"></div>
@@ -7,7 +9,7 @@
 <form action="{{url_for('profile.upload_avatar')}}" method="POST" enctype="multipart/form-data">
     <p><input type="file" name="file">
     <p><input type="submit" value="Загрузить новый аватар">
-    {% for cat, msg in get_flashed_messages(True) %}
+        {% for cat, msg in get_flashed_messages(True) %}
     <div class="flash {{cat}}">{{msg}}</div>
     {% endfor %}
 </form>

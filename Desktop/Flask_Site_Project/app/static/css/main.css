@@ -22,8 +22,26 @@ body.main-bg {
     background-attachment: fixed;
 }
 
+body.auth-bg {
+    background-image: url('/static/img_for_site/auth.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    overflow: hidden;
+    height: 100vh;
+}
+
 body.registration-bg {
     background-image: url('/static/img_for_site/registration.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    overflow: hidden;
+    height: 100vh;
+}
+
+body.pr-bg {
+    background-image: url('/static/img_for_site/pr.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -49,7 +67,13 @@ img {
 
 .flash.success {
     border: 1px solid #009a3b;
-    background: #00ff62
+    background: #00ff6200;
+    color: #28ba00;
+    border-radius: 14px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+
 }
 
 .flash.error {
@@ -227,7 +251,7 @@ header nav ul li.btn a:hover {
     background: #3a3a3a;
     border-radius: 10px;
     color: #ffffff;
-    font-size: 16px;
+    font-size: 20px;
     transition: all 0.3s ease;
     box-sizing: border-box;
 }
@@ -235,6 +259,7 @@ header nav ul li.btn a:hover {
 .reg--info input:not(.btn-success):focus {
     outline: none;
     border-color: #ff9d2e;
+    font-size: 22px;
     background: #4a4a4a;
     transform: translateY(-2px);
 }
@@ -349,4 +374,152 @@ body.example-bg {
     display: inline-block;
     right: 1660px;
     transform: skew(-60deg)
+}
+
+.auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.auth--info {
+    width: 380px;
+    background: rgba(0, 0, 0, 0.75);
+    padding: 40px;
+    border-radius: 20px;
+    margin-top: -80px;
+    border: 3px solid rgb(255, 136, 0);
+}
+
+.auth--info h1 {
+    text-align: center;
+    font-size: 33px;
+    color: #fff;
+    font-weight: 700;
+    padding-bottom: 23px;
+}
+
+.auth--info p {
+    margin-top: 26px;
+    margin-bottom: 6px;
+    position: relative;
+}
+
+.auth--info label {
+    display: block;
+    margin-bottom: 8px;
+    color: #DC7000;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.auth--info input:not(.btn-success) {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #DC7000;
+    background: #3a3a3a;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.auth--info input:not(.btn-success):focus {
+    outline: none;
+    font-size: 22px;
+    border-color: #ff9d2e;
+    background: #3c3c3c;
+    transform: translateY(-2px);
+}
+
+.auth--info .btn-success {
+    background: #DC7000;
+    color: #fff;
+    border-radius: 50px;
+    font-size: 18px;
+    padding: 14px 33px;
+    border: 0;
+    cursor: pointer;
+    transition: all 500ms ease;
+}
+
+.auth--info .btn-success:hover {
+    background: #9d3904;
+    transform: scale(1.05);
+}
+
+.auth--info h1 {
+    text-align: center;
+    font-size: 31px;
+}
+
+.auth--info p:last-of-type {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.auth--info input.invalid {
+    border-color: #ff4444;
+}
+
+.auth--info .invalid-feedback {
+    color: #ff8888;
+    font-size: 12px;
+    display: block;
+    margin-top: 5px;
+}
+
+.auth--info input[name="remember"] {
+    display: none;
+}
+
+.auth--info p:has(input[name="remember"]) {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.auth--info label[for="remember"] {
+    position: relative;
+    padding-left: 55px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #fff;
+    line-height: 24px;
+}
+
+.auth--info label[for="remember"]::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 45px;
+    height: 24px;
+    background: #555;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.auth--info label[for="remember"]::after {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    width: 18px;
+    height: 18px;
+    background: #fff;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.auth--info input[name="remember"]:checked+label[for="remember"]::before {
+    background: #DC7000;
+}
+
+.auth--info input[name="remember"]:checked+label[for="remember"]::after {
+    left: 24px;
 }

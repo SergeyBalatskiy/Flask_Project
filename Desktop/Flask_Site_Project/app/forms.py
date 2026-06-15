@@ -5,7 +5,7 @@ from flask_wtf.file import FileAllowed
 
 class LoginForm(FlaskForm):
     email = StringField("Email: ", validators=[Email("Некорректный email")])
-    password = PasswordField("Пароль: ", validators=[DataRequired(), Length(min=5, max = 100,  message = "Пароль должен быть от 5 символов!")])
+    password = PasswordField("Пароль: ", validators=[DataRequired(message="Это поле должно быть заполнено обязательно!"), Length(min=5, max = 100,  message = "Пароль должен быть от 5 символов!")])
     remember = BooleanField("Запомнить", default=False)
     submit = SubmitField("Войти") 
 

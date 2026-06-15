@@ -7,6 +7,9 @@
 <div class="reg">
     <div class="reg--info">
         <h1>Создание аккаунта</h1>
+
+        <i class="bx bx-user"></i>
+
         <form action="" method="post" novalidate class="form-contact">
             {{ form.hidden_tag() }}
             {% for field in form if field.name not in ['csrf_token', 'submit'] -%}
