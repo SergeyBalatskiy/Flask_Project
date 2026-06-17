@@ -1,9 +1,10 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey
 from datetime import datetime, timedelta
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, flash,redirect
 from flask_login import LoginManager
 from flask_login import UserMixin
+from werkzeug.exceptions import RequestEntityTooLarge
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = (
@@ -18,7 +19,7 @@ app.config["UPLOAD_FOLDER"] = (
 app.config["UPLOAD_FOLDER_TARGET_BODY"] = (
     r"C:\Users\OS\Desktop\Flask_Site_Project\app\photo_of_target_body"
 )
-app.config['MAX_CONTENT_LENGTH'] = 8 * 1024 * 1024
+app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024
 app.config.update(
     SESSION_COOKIE_SECURE=True,
     SESSION_COOKIE_HTTPONLY=True,
@@ -51,6 +52,10 @@ def error_handler_http(error):
     print(error)
     return render_template("error_handler.html")
 
+@app.errorhandler(RequestEntityTooLarge)
+def error_of_large_file(e):
+    flash("Превышен максимальный размер для загрузки файла (2 МБ)!", category="error")
+    return redirect(url_for("profile.profile_of_user"))
 
 class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)

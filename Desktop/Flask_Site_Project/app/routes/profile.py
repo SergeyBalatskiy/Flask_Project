@@ -27,22 +27,23 @@ profile = Blueprint("profile", __name__)
 @profile.route("/")
 @login_required
 def profile_of_user():
-    return render_template("profile.html")
-
+    info = Users.query.get(current_user.id)
+    info_quest = info.pr
+    return render_template("profile.html", quest_list = info_quest)
 
 @profile.route("/show_profile")
 @login_required
 def show_profile_user():
+
     info = []
 
     try:
         info = Users.query.get(current_user.id)
         info_quest = info.pr
+        print("💚")
+        print(current_user.id == info_quest.id_of_user)
         return render_template("show_profile.html", list = info, quest_list = info_quest)   
     except Exception as e:
-        print(f"Ошибка:{e}")
-        print("💚", info)
-        print("💚", type(info))
         return f"{e}"
      
 def allowed_file(filename):
@@ -172,6 +173,42 @@ def upload_avatar():
 
 
 def load_image():
+
+    if current_user.avatar == "default.png":
+        try:
+            with app.open_resource(r"avatars_of_users/default.png", "rb") as f:
+                img = f.read()
+        except Exception as e:
+            print("Возника ошибка:", e)
+
+    else:
+        name = current_user.avatar
+        try:
+            with app.open_resource(f"avatars_of_users/{name}", "rb") as f:
+                img = f.read()
+        except Exception as e:
+            print("Возника ошибка:", e)
+
+    return img
+
+@profile.route("/show_avatar")
+@login_required
+def show_avatar_in_quest():
+
+    img = load_image_for_quest()
+
+    name_image = current_user.avatar
+
+    indx = name_image.find(".")
+
+    expansion = name_image[indx + 1 :]
+
+    h = make_response(img)
+    h.headers["Content-Type"] = f"image/{expansion}"
+
+    return h
+
+def load_image_for_quest():
 
     if current_user.avatar == "default.png":
         try:

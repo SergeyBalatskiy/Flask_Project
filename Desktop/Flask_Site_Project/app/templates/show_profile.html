@@ -8,22 +8,28 @@
     <div class="exampl--info">
         <ul>
             <li>
-                <p>id: {{list.id}}</p>
-                <p>Имя: {{list.name}}</p>
-                <p>Фамилия: {{list.surname}}</p>
-                <p>Возраст: {{quest_list.age}}</p>
-                <p>Пол: {{quest_list.gender}}</p>
-                <p>Рост: {{quest_list.height}}</p>
-                <p>Вес: {{quest_list.weight}}</p>
-                <p>Целевой вес: {{quest_list.target_weight}}</p>
-                <p>Цель тренировок: {{quest_list.target_of_training}}</p>
-                <p>Опыт тренировок: {{quest_list.experience_of_training}}</p>
-                <p>Активность в течение дня: {{quest_list.active_in_the_day}}</p>
-                <p>Фото и уровень жира (текущая и желаемая форма):</p>
-                <p>Проблемы со здоровьем: {{quest_list.health_problems}}</p>
-                <p>Комментарий: {{quest_list.Report}}</p>
-                <p>Дата создания/редактирования анкеты: {{quest_list.user_date.strftime("%d.%m.%y, %H:%M")}}</p>
+                <p><span class="orange-text-quest">Имя:</span> {{list.name}}</p>
+                <p><span class="orange-text-quest">Фамилия:</span> {{list.surname}}</p>
+                <p><span class="orange-text-quest">Возраст:</span> {{quest_list.age}}</p>
+                <p><span class="orange-text-quest">Пол:</span> {{quest_list.gender}}</p>
+                <p><span class="orange-text-quest">Рост:</span> {{quest_list.height}}</p>
+                <p><span class="orange-text-quest">Вес:</span> {{quest_list.weight}}</p>
+                <p><span class="orange-text-quest">Целевой вес:</span> {{quest_list.target_weight}}</p>
+                <p><span class="orange-text-quest">Цель тренировок:</span> {{quest_list.target_of_training}}</p>
+                <p><span class="orange-text-quest">Опыт тренировок:</span> {{quest_list.experience_of_training}}</p>
 
+                <p><span class="orange-text-quest">Активность в течение дня:</span> {{quest_list.active_in_the_day}}</p>
+                <p><span class="orange-text-quest">Фото и уровень жира(желаемае и текущая форма):</span>
+                <div class="photo-quest">
+                    <div class="profile-quest">
+                        <img src="{{url_for('profile.show_avatar_in_quest')}}" alt="Фото для анкеты">
+                    </div>
+                </div>
+                </p>
+                <p><span class="orange-text-quest">Проблемы со здоровьем:</span> {{quest_list.health_problems}}</p>
+                <p><span class="orange-text-quest">Комментарий:</span>{{quest_list.Report}}</p>
+                <p><span class="orange-text-quest">Дата создания/редактирования анкеты:</span>
+                    {{quest_list.user_date.strftime("%d.%m.%y, %H:%M")}}</p>
             </li>
         </ul>
     </div>
