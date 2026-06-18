@@ -17,6 +17,8 @@ from flask_login import (
     login_required,
     current_user,
 )
+from flask import send_file
+from flask import send_from_directory
 from werkzeug.utils import secure_filename
 import os
 from PIL import Image
@@ -40,9 +42,8 @@ def show_profile_user():
     try:
         info = Users.query.get(current_user.id)
         info_quest = info.pr
-        print("💚")
-        print(current_user.id == info_quest.id_of_user)
-        return render_template("show_profile.html", list = info, quest_list = info_quest)   
+        image_names = os.listdir(f"app/photo_of_target_body/{current_user.id}")
+        return render_template("show_profile.html", info = info, info_quest = info_quest, image_names = image_names)   
     except Exception as e:
         return f"{e}"
      
@@ -50,6 +51,14 @@ def allowed_file(filename):
     """Функция проверки расширения файла"""
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
+
+@profile.route('/show_photo_body/<filename>')
+def show_photo_body(filename):
+
+    base_path = app.config["UPLOAD_FOLDER_TARGET_BODY"]  
+    full_path = os.path.join(base_path, str(current_user.id), filename)
+    
+    return send_file(full_path, mimetype='image/jpeg')
 
 @profile.route("/show_avatar")
 @login_required
@@ -173,42 +182,6 @@ def upload_avatar():
 
 
 def load_image():
-
-    if current_user.avatar == "default.png":
-        try:
-            with app.open_resource(r"avatars_of_users/default.png", "rb") as f:
-                img = f.read()
-        except Exception as e:
-            print("Возника ошибка:", e)
-
-    else:
-        name = current_user.avatar
-        try:
-            with app.open_resource(f"avatars_of_users/{name}", "rb") as f:
-                img = f.read()
-        except Exception as e:
-            print("Возника ошибка:", e)
-
-    return img
-
-@profile.route("/show_avatar")
-@login_required
-def show_avatar_in_quest():
-
-    img = load_image_for_quest()
-
-    name_image = current_user.avatar
-
-    indx = name_image.find(".")
-
-    expansion = name_image[indx + 1 :]
-
-    h = make_response(img)
-    h.headers["Content-Type"] = f"image/{expansion}"
-
-    return h
-
-def load_image_for_quest():
 
     if current_user.avatar == "default.png":
         try:

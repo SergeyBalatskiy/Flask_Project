@@ -8,28 +8,34 @@
     <div class="exampl--info">
         <ul>
             <li>
-                <p><span class="orange-text-quest">Имя:</span> {{list.name}}</p>
-                <p><span class="orange-text-quest">Фамилия:</span> {{list.surname}}</p>
-                <p><span class="orange-text-quest">Возраст:</span> {{quest_list.age}}</p>
-                <p><span class="orange-text-quest">Пол:</span> {{quest_list.gender}}</p>
-                <p><span class="orange-text-quest">Рост:</span> {{quest_list.height}}</p>
-                <p><span class="orange-text-quest">Вес:</span> {{quest_list.weight}}</p>
-                <p><span class="orange-text-quest">Целевой вес:</span> {{quest_list.target_weight}}</p>
-                <p><span class="orange-text-quest">Цель тренировок:</span> {{quest_list.target_of_training}}</p>
-                <p><span class="orange-text-quest">Опыт тренировок:</span> {{quest_list.experience_of_training}}</p>
+                <p><span class="orange-text-quest">Имя:</span> {{info.name}}</p>
+                <p><span class="orange-text-quest">Фамилия:</span> {{info.surname}}</p>
+                <p><span class="orange-text-quest">Возраст:</span> {{info_quest.age}}</p>
+                <p><span class="orange-text-quest">Пол:</span> {{info_quest.gender}}</p>
+                <p><span class="orange-text-quest">Рост:</span> {{info_quest.height}}</p>
+                <p><span class="orange-text-quest">Вес:</span> {{info_quest.weight}}</p>
+                <p><span class="orange-text-quest">Целевой вес:</span> {{info_quest.target_weight}}</p>
+                <p><span class="orange-text-quest">Цель тренировок:</span> {{info_quest.target_of_training}}</p>
+                <p><span class="orange-text-quest">Опыт тренировок:</span> {{info_quest.experience_of_training}}</p>
 
-                <p><span class="orange-text-quest">Активность в течение дня:</span> {{quest_list.active_in_the_day}}</p>
+                <p><span class="orange-text-quest">Активность в течение дня:</span> {{info_quest.active_in_the_day}}</p>
                 <p><span class="orange-text-quest">Фото и уровень жира(желаемае и текущая форма):</span>
                 <div class="photo-quest">
                     <div class="profile-quest">
-                        <img src="{{url_for('profile.show_avatar_in_quest')}}" alt="Фото для анкеты">
+
+                        {% for image_name in image_names %}
+
+                        <img src="{{ url_for('profile.show_photo_body', filename=image_name) }}" alt="Фото" class="src">
+
+                        {% endfor %}
+
                     </div>
                 </div>
                 </p>
-                <p><span class="orange-text-quest">Проблемы со здоровьем:</span> {{quest_list.health_problems}}</p>
-                <p><span class="orange-text-quest">Комментарий:</span>{{quest_list.Report}}</p>
+                <p><span class="orange-text-quest">Проблемы со здоровьем:</span> {{info_quest.health_problems}}</p>
+                <p><span class="orange-text-quest">Комментарий:</span>{{info_quest.Report}}</p>
                 <p><span class="orange-text-quest">Дата создания/редактирования анкеты:</span>
-                    {{quest_list.user_date.strftime("%d.%m.%y, %H:%M")}}</p>
+                    {{info_quest.user_date.strftime("%d.%m.%y, %H:%M")}}</p>
             </li>
         </ul>
     </div>

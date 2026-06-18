@@ -762,3 +762,21 @@ body.example-bg {
     font-size: 25px;
     font-weight: 500;
 }
+
+.profile-quest {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.profile-quest img {
+    width: 200px !important;
+    height: 200px !important;
+    object-fit: cover !important;
+    border: 3px solid #DC7000 !important;
+    border-radius: 15px !important;
+    display: block !important;
+    background: #2a2a2a !important;
+}
