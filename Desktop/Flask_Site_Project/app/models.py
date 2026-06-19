@@ -94,7 +94,7 @@ class Questionnaire(db.Model):
     photo_of_target_body = db.Column(db.String, nullable=False)
     health_problems = db.Column(db.String(1000), nullable=False)
     Report = db.Column(db.String, nullable=False)
-    user_date = db.Column(db.DateTime, default=datetime.utcnow)
+    user_date = db.Column(db.DateTime, default=datetime.now)
 
     def __repr__(self):
 

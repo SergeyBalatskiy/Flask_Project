@@ -199,3 +199,4 @@ def load_image():
             print("Возника ошибка:", e)
 
     return img
+

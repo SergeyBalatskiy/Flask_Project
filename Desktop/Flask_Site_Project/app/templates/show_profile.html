@@ -5,6 +5,9 @@
 {% block body %}
 
 <div class="exampl">
+    {% for cat, msg in get_flashed_messages(True) %}
+    <div class="flash {{cat}}">{{msg}}</div>
+    {% endfor %}
     <div class="exampl--info">
         <ul>
             <li>
@@ -19,7 +22,7 @@
                 <p><span class="orange-text-quest">Опыт тренировок:</span> {{info_quest.experience_of_training}}</p>
 
                 <p><span class="orange-text-quest">Активность в течение дня:</span> {{info_quest.active_in_the_day}}</p>
-                <p><span class="orange-text-quest">Фото и уровень жира(желаемае и текущая форма):</span>
+                <p><span class="orange-text-quest">Фото и уровень жира(желаемая и текущая форма):</span>
                 <div class="photo-quest">
                     <div class="profile-quest">
 
@@ -33,7 +36,7 @@
                 </div>
                 </p>
                 <p><span class="orange-text-quest">Проблемы со здоровьем:</span> {{info_quest.health_problems}}</p>
-                <p><span class="orange-text-quest">Комментарий:</span>{{info_quest.Report}}</p>
+                <p><span class="orange-text-quest">Комментарий:</span> {{info_quest.Report}}</p>
                 <p><span class="orange-text-quest">Дата создания/редактирования анкеты:</span>
                     {{info_quest.user_date.strftime("%d.%m.%y, %H:%M")}}</p>
             </li>

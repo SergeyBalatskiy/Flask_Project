@@ -22,6 +22,15 @@ body.main-bg {
     background-attachment: fixed;
 }
 
+body.edit {
+    background-image: url('/static/img_for_site/edit.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    overflow: hidden;
+    height: 100vh;
+}
+
 body.auth-bg {
     background-image: url('/static/img_for_site/auth.jpg');
     background-size: cover;
