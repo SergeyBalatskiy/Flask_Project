@@ -32,46 +32,45 @@ def edit_profile():
 
         real_files = []
 
-        # Нужно как то продумать как сделать так чтобы при отсутствии взаимодействия с кнопкой загрузить фото, фотки сохранялись
-        # for f in form.photo_of_target_body.data:
-        #     if f and f.filename:
-        #         real_files.append(f)
+        for f in form.photo_of_target_body.data:
+            if f and f.filename:
+                real_files.append(f)
 
-        # for check_file in real_files:
-        #     try:
-        #         with Image.open(check_file) as img:
-        #             img.verify()
-        #         check_file.seek(0)
-        #     except:
-        #         check_name = secure_filename(check_file.filename)
-        #         flash(f"Произошла ошибка при попытке проверить файл {check_name} на целостность/коректность!", category="error")
-        #         return render_template("profile_edit.html", form = form)
+        for check_file in real_files:
+            try:
+                with Image.open(check_file) as img:
+                    img.verify()
+                check_file.seek(0)
+            except:
+                check_name = secure_filename(check_file.filename)
+                flash(f"Произошла ошибка при попытке проверить файл {check_name} на целостность/коректность!", category="error")
+                return render_template("profile_edit.html", form = form)
 
-        # upload_path = os.path.join(app.config["UPLOAD_FOLDER_TARGET_BODY"], str(current_user.id))
+        upload_path = os.path.join(app.config["UPLOAD_FOLDER_TARGET_BODY"], str(current_user.id))
 
-        # try:
-        #     os.makedirs(upload_path, exist_ok=True)
-        # except Exception as e:
-        #     print(e)
-        #     flash("Возникла непредвиденная ошибка при попытке сохранения фото.", category="error")
-        #     return render_template("profile_edit.html", form=form)
+        try:
+            os.makedirs(upload_path, exist_ok=True)
+        except Exception as e:
+            print(e)
+            flash("Возникла непредвиденная ошибка при попытке сохранения фото.", category="error")
+            return render_template("profile_edit.html", form=form)
 
-        # image_names = os.listdir(f"app/photo_of_target_body/{current_user.id}")
-        # for i in image_names:
-        #     os.remove(os.path.join(upload_path, i))
+        image_names = os.listdir(f"app/photo_of_target_body/{current_user.id}")
+        for i in image_names:
+            os.remove(os.path.join(upload_path, i))
 
-        # files_filenames = []
+        files_filenames = []
 
-        # for file in real_files:
-        #     file_filename = secure_filename(file.filename)
-        #     file_path = os.path.join(upload_path, file_filename)
-        #     try:
-        #         file.save(file_path)
-        #     except:
-        #         flash("Обнаружен пустой файл", category="error")
-        #         return render_template("profile_edit.html", form = form)
+        for file in real_files:
+            file_filename = secure_filename(file.filename)
+            file_path = os.path.join(upload_path, file_filename)
+            try:
+                file.save(file_path)
+            except:
+                flash("Обнаружен пустой файл", category="error")
+                return render_template("profile_edit.html", form = form)
             
-        #     files_filenames.append(file_filename)
+            files_filenames.append(file_filename)
         
         photos_lst = ", ".join(files_filenames)
 

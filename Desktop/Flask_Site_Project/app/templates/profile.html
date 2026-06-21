@@ -43,13 +43,20 @@
             <h1>Ваша анкета:</h1>
 
             <div class="show-quest">
-                <a href='{{url_for("profile.show_profile_user") }}' class="btn">Смотреть анкету</a>
-                <p><span class="orange-text-profile">Пол:</span> {{quest_list.gender}}</p>
-                <p><span class="orange-text-profile">Рост:</span> {{quest_list.height}}</p>
-                <p><span class="orange-text-profile">Активность в течение дня:</span> {{quest_list.active_in_the_day}}
-                </p>
-                <p><span class="orange-text-profile">Комментарий:</span> {{quest_list.Report}}</p>
-                <p>...</p>
+                <div class="data">
+                    <p><span class="orange-text-profile">Пол:</span> {{quest_list.gender}}</p>
+                    <p><span class="orange-text-profile">Рост:</span> {{quest_list.height}}</p>
+                    <p><span class="orange-text-profile">Активность в течение дня:</span>
+                        {{quest_list.active_in_the_day}}
+                    </p>
+                    <p><span class="orange-text-profile">Комментарий:</span> {{quest_list.Report}}</p>
+                    <p>...</p>
+                </div>
+                <div class="buttons">
+                    <a href="#" class="btn-danger">Удалить анкету</a>
+                    <a href='{{url_for("edit_pr.edit_profile") }}' class="btn">Редактировать анкету</a>
+                    <a href='{{url_for("profile.show_profile_user") }}' class="btn">Смотреть анкету</a>
+                </div>
             </div>
         </div>
 

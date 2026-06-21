@@ -27,7 +27,7 @@ body.edit {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    overflow: hidden;
+    overflow: auto;
     height: 100vh;
 }
 
@@ -730,10 +730,19 @@ body.example-bg {
     padding: 40px;
     border-radius: 20px;
     border: 3px solid rgb(255, 136, 0);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    align-items: flex-start;
+}
+
+.data {
+    flex: 1;
+    min-width: 200px;
 }
 
 .show-quest .btn {
-    padding: 19px 27px;
+    padding: 14px 23px;
     background: #DC7000;
     color: #fff;
     border: none;
@@ -743,13 +752,11 @@ body.example-bg {
     font-weight: 600;
     text-decoration: none;
     transition: all 500ms ease;
-    float: right;
-    margin-top: 33px;
 }
 
 .show-quest .btn:hover {
     background: #af5b01;
-    transform: scale(1.08);
+    transform: scale(1.04);
 }
 
 .show-quest .orange-text-profile {
@@ -788,4 +795,142 @@ body.example-bg {
     border-radius: 15px !important;
     display: block !important;
     background: #2a2a2a !important;
+}
+
+.edit--info {
+    padding-top: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.questionaire {
+    background: rgba(0, 0, 0, 0.75);
+    padding: 50px;
+    border-radius: 20px;
+    margin-top: -80px;
+    border: 3px solid rgb(255, 136, 0);
+    min-height: 1240px;
+}
+
+.form-contact p {
+    margin-top: 26px;
+    margin-bottom: 6px;
+    position: relative;
+    color: #DC7000;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.form-contact label {
+    display: block;
+    color: #DC7000;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.form-contact input:not(.btn-success) {
+    width: 600px;
+    padding: 12px 15px;
+    border: 2px solid #DC7000;
+    background: #3a3a3a;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-contact input:not(.btn-success):focus {
+    outline: none;
+    border-color: #ff9d2e;
+    font-size: 22px;
+    background: #4a4a4a;
+    transform: translateY(-2px);
+}
+
+.form-contact .btn-success {
+    background: #DC7000;
+    color: #fff;
+    border-radius: 50px;
+    font-size: 18px;
+    padding: 14px 33px;
+    border: 0;
+    cursor: pointer;
+    transition: all 500ms ease;
+}
+
+.form-contact .btn-success:hover {
+    background: #9d3904;
+    transform: scale(1.05);
+}
+
+.form-contact h1 {
+    text-align: center;
+    font-size: 31px;
+    padding-bottom: 20px;
+}
+
+.form-contact p:last-of-type {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.form-contact input.invalid {
+    border-color: #ff4444;
+}
+
+.form-contact .invalid-feedback {
+    color: #ff8888;
+    font-size: 12px;
+    display: block;
+    margin-top: 5px;
+}
+
+.form-contact input[type="file"] {
+    padding: 14px 27px;
+    background: #DC7000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 500ms ease;
+}
+
+.form-contact input[type="file"]::file-selector-button {
+    display: none;
+}
+
+.buttons .btn-danger {
+    display: inline-block;
+    padding: 14px 23px;
+    background: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 500ms ease;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.buttons .btn-danger:hover {
+    background: #ab0000;
+    transform: scale(1.04);
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-left: auto;
+    margin-top: 30px;
 }

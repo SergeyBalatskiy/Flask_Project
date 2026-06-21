@@ -5,10 +5,11 @@
 {% block body %}
 
 <div class="exampl">
-    {% for cat, msg in get_flashed_messages(True) %}
-    <div class="flash {{cat}}">{{msg}}</div>
-    {% endfor %}
+
     <div class="exampl--info">
+        {% for cat, msg in get_flashed_messages(True) %}
+        <div class="flash {{cat}}">{{msg}}</div>
+        {% endfor %}
         <ul>
             <li>
                 <p><span class="orange-text-quest">Имя:</span> {{info.name}}</p>
