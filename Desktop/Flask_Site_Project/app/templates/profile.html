@@ -31,7 +31,8 @@
                     <div class="form-actions">
                         <input type="file" name="file">
                         <input type="submit" value="Загрузить новый аватар">
-                        <a href='{{url_for("de_auth.deauth") }}' class="btn btn-danger">Выйти</a>
+                        <a href='{{url_for("delete_user.confirm_to_delete") }}' class="btn btn-danger">Удалить
+                            аккаунт</a>
                     </div>
                 </form>
 
@@ -61,7 +62,9 @@
         </div>
 
         {% else %}
-        <a href='{{url_for("create_profile.create_profile") }}' class="btn">У вас нет анкеты. Создать анкету?</a>
+        <div class="buttons-wth-quest">
+            <a href='{{url_for("create_profile.create_profile") }}' class="btn">У вас нет анкеты. Создать анкету?</a>
+        </div>
         {% endif %}
     </div>
 </div>

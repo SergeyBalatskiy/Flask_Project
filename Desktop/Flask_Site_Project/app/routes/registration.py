@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, session, redirect, url_for
+from flask import Blueprint, render_template, request, session, redirect, url_for, flash
 from werkzeug.security import generate_password_hash
 from app.models import Users, db
 from flask_login import (
@@ -10,6 +10,7 @@ from flask_login import (
     current_user,
 )
 from app.forms import RegisterForm
+from sqlalchemy import exists
 
 registration_bp = Blueprint("registration", __name__)
 
@@ -35,6 +36,13 @@ def registration():
             avatar = "default.png"
         )
 
+
+        q = db.session.query(Users).filter(Users.mail == form.mail.data)
+
+        if db.session.query(q.exists()).scalar():
+            flash("Пользователь с такой почтой уже зарегистрирован!", category="error")
+            return render_template("registration.html", form = form)
+    
         try:
             db.session.add(new_user)
             db.session.commit()

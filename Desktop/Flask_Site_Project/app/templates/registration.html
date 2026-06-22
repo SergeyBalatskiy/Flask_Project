@@ -8,7 +8,9 @@
     <div class="reg--info">
         <h1>Создание аккаунта</h1>
 
-        <i class="bx bx-user"></i>
+        {% for cat, msg in get_flashed_messages(True) %}
+        <div class="flash {{cat}}">{{msg}}</div>
+        {% endfor %}
 
         <form action="" method="post" novalidate class="form-contact">
             {{ form.hidden_tag() }}

@@ -72,7 +72,6 @@ class Users(UserMixin, db.Model):
 
     @property
     def is_active(self):
-        # Example: Only active if the user has verified their email
         return self.mail
 
     def __repr__(self):

@@ -74,7 +74,15 @@ body.pr-bg {
     min-height: 100vh;
 }
 
-.create-bg {
+.confirm-user-bg {
+    background-image: url('/static/img_for_site/delete_user.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+.confirm-bg {
     background-image: url('/static/img_for_site/delete.jpeg');
     background-size: cover;
     background-position: center;
@@ -848,7 +856,7 @@ body.example-bg {
 }
 
 .form-contact input:not(.btn-success) {
-    width: 600px;
+    width: 380px;
     padding: 12px 15px;
     border: 2px solid #DC7000;
     background: #3a3a3a;
@@ -979,4 +987,100 @@ body.example-bg {
 .create--quest h1 {
     text-align: center;
     padding-bottom: 30px;
+}
+
+.delete--info {
+    padding-top: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.div-delete {
+    background: rgba(0, 0, 0, 0.75);
+    padding: 60px;
+    border-radius: 20px;
+    border: 3px solid rgb(255, 136, 0);
+    width: 600px;
+    max-width: 100%;
+    position: relative;
+}
+
+.div-delete h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.div-delete .btn-danger {
+    position: absolute;
+    left: 20px;
+    display: inline-block;
+    padding: 14px 23px;
+    background: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 500ms ease;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.div-delete .btn-danger:hover {
+    scale: 1.05;
+}
+
+.div-delete .btn-cancell {
+    display: inline-block;
+    position: absolute;
+    right: 20px;
+    padding: 14px 23px;
+    background: #dc7000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 500ms ease;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.div-delete .btn-cancell:hover {
+    scale: 1.05;
+}
+
+.buttons-wth-quest .btn {
+    display: inline-block;
+    padding: 14px 23px;
+    background: #dc7000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 500ms ease;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.buttons-wth-quest .btn:hover {
+    background: #a05300;
+    transform: scale(1.04);
+}
+
+.buttons-wth-quest {
+    position: relative;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-left: auto;
+    margin-top: 30px;
 }

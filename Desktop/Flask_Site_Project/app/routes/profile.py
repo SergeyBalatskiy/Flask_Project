@@ -82,6 +82,8 @@ def show_avatar():
 @login_required
 def upload_avatar():
 
+    print("😀ФУНКЦИЯ ВЫЗВАЛАСЬ!")
+
     if request.method == "POST":
 
         if "file" not in request.files:
@@ -140,7 +142,7 @@ def upload_avatar():
                 )
 
             except Exception as e:
-                print(e)
+                print("Ошибка:", e)
 
             name_image = secure_filename(file.filename)
 
@@ -152,9 +154,13 @@ def upload_avatar():
 
 
             if (expansion in current_user.avatar):
-                print(expansion in current_user.avatar)
+                print("Прошел проверку 1😀")
 
                 file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename_id))
+
+                flash("Ваше новое фото успешно загружено!", category="success")
+                return redirect(url_for("profile.profile_of_user"))
+
 
             else:
 
