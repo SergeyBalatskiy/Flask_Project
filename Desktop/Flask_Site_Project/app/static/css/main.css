@@ -66,6 +66,22 @@ body.pr-bg {
     min-height: 100vh;
 }
 
+.create-bg {
+    background-image: url('/static/img_for_site/create_quest.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+.create-bg {
+    background-image: url('/static/img_for_site/delete.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
 img {
     max-width: 100%;
 }
@@ -933,4 +949,34 @@ body.example-bg {
     flex-wrap: wrap;
     margin-left: auto;
     margin-top: 30px;
+}
+
+.wrapper_quest {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.create--quest {
+    background: rgba(0, 0, 0, 0.75);
+    padding: 60px;
+    border-radius: 20px;
+    border: 3px solid rgb(255, 136, 0);
+    width: 570px;
+    max-width: 100%;
+}
+
+.div-quest {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.create--quest h1 {
+    text-align: center;
+    padding-bottom: 30px;
 }

@@ -20,7 +20,12 @@ create_pr = Blueprint("create_profile", __name__)
 def create_profile():
 
     form = AddProfile()
+    quest = Questionnaire.query.filter_by(id_of_user=current_user.id).first()
 
+    if quest:
+        flash("У вас уже есть анкета!", category="success")
+        return redirect(url_for("profile.show_profile_user"))
+    
     if form.validate_on_submit():
 
         real_files = []

@@ -7,6 +7,7 @@ from app.routes.de_auth import de_auth
 from app.routes.create_profile import create_pr
 from app.routes.about_site import about_site_info
 from app.routes.profile_edit import edit_pr
+from app.routes.delete_profile import delete_profile
 
 app.register_blueprint(main_bp, url_prefix = "/")
 app.register_blueprint(registration_bp, url_prefix = "/create_user")
@@ -16,3 +17,4 @@ app.register_blueprint(de_auth, url_pefix = "/de_auth")
 app.register_blueprint(create_pr, url_prefix = "/create")
 app.register_blueprint(about_site_info, url_prefix = "/about")
 app.register_blueprint(edit_pr, url_prefix = "/edit")
+app.register_blueprint(delete_profile, url_for= "/delete")
