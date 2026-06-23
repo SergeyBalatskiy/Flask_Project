@@ -3,12 +3,14 @@ from wtforms import StringField, SubmitField, BooleanField, PasswordField, FileF
 from wtforms.validators import DataRequired, Email, Length, EqualTo
 from flask_wtf.file import FileAllowed
 
+# Поле для входа в аккаунт
 class LoginForm(FlaskForm):
     email = StringField("Email: ", validators=[Email("Некорректный email")])
     password = PasswordField("Пароль: ", validators=[DataRequired(message="Это поле должно быть заполнено обязательно!"), Length(min=5, max = 100,  message = "Пароль должен быть от 5 символов!")])
     remember = BooleanField("Запомнить", default=False)
     submit = SubmitField("Войти") 
 
+# Поле для регистрации пользователя
 class RegisterForm(FlaskForm):
     name = StringField("Имя: ", validators=[Length(min=2, max=50, message="Имя должно быть от 2 до 50 символов!")])
     surname = StringField("Фамилия: ", validators=[Length(min=4, max=80, message="Фамилия должна быть от 4 до 80 символов!")])
@@ -18,6 +20,7 @@ class RegisterForm(FlaskForm):
     phone = StringField("Телефон: ", validators=[Length(min=11, max=100, message="Номер телефона должен быть длинной от 11 до 100 символов!")])
     submit = SubmitField("Cоздать аккаунт") 
 
+# Поле создания анкеты
 class AddProfile(FlaskForm):
     age = StringField("Возраст: ", validators = [DataRequired(message='Поле "Возраст" не должно быть пустым!')])
     gender = StringField("Пол: ", validators=[DataRequired(message='Поле "Пол" не должно быть пустым!')])

@@ -27,6 +27,8 @@
                 <div class="photo-quest">
                     <div class="profile-quest">
 
+                        <!-- Загрузка фото пользователя для текущ. пользователя -->
+
                         {% for image_name in image_names %}
 
                         <img src="{{ url_for('profile.show_photo_body', filename=image_name) }}" alt="Фото" class="src">

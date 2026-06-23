@@ -1249,3 +1249,56 @@ body.example-bg {
     font-weight: 600;
     font-size: 20px;
 }
+
+.error-bg {
+    background-image: url('/static/img_for_site/error_404.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.error-container {
+    background: rgba(0, 0, 0, 0.75);
+    padding: 50px;
+    border-radius: 20px;
+    border: 3px solid rgb(255, 136, 0);
+}
+
+.error-message {
+    text-align: center;
+    padding: 15px;
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.error-description {
+    text-align: center;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.home-button {
+    background: #DC7000;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 20px;
+    padding: 14px 43px;
+    border: 0;
+    cursor: pointer;
+    transition: all 500ms ease;
+}
+
+.home-button:hover {
+    background: #9d3904;
+    transform: scale(1.02);
+}
+
+.error-div {
+    padding: 30px;
+}
+
+.center-a {
+    text-align: center;
+    margin-top: 27px;
+}

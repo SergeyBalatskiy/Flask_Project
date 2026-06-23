@@ -14,7 +14,7 @@
         <form action="" method="post" novalidate class="form-contact">
 
             {{ form.hidden_tag() }}
-
+            <!-- Логика аутентификации берется из  LoginForm (forms.py)-->
             {% for field in form if field.name not in ['csrf_token', 'remember', 'submit'] -%}
             <p>{{ field.label() }}</p>
             {% if field.errors %}

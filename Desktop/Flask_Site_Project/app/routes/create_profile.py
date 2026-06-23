@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, request, session, redirect, url_for, flash
-from app.models import Users, db, Questionnaire, app
+from flask import Blueprint, render_template, redirect, url_for, flash
+from app.models import db, Questionnaire, app
 from flask_login import (
     LoginManager,
     UserMixin,
@@ -15,6 +15,7 @@ import os
 
 create_pr = Blueprint("create_profile", __name__)
 
+# Создание анкеты
 @create_pr.route("/create_profile", methods=["POST", "GET"])
 @login_required
 def create_profile():
@@ -99,5 +100,4 @@ def create_profile():
             print("Ошибка:", e)
             return "При обработке произошла ошибка. Возможно, вы некорректно ввели требуемые данные! Попробуйте повторить еще раз."
 
-    
     return render_template("create_profile.html", form = form)

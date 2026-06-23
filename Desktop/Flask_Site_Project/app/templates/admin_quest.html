@@ -6,6 +6,7 @@
 
 <div class="admin--quest">
 
+    <!-- Поиск по имени -->
     <form method="post">
         <div class="find-quest">
             <input type="text" name="find_user" id="find_user" class="form-control"
@@ -13,8 +14,8 @@
             <input type="submit" class="btn-btn-success" value="Поиск">
         </div>
 
+        <!-- Берутся пользователи и показываются только те, которые создали анкету -->
         {% for u in list %}
-
         {% if u.pr %}
 
         <div class="inform_quest">
@@ -30,7 +31,6 @@
         </div>
 
         {% endif %}
-
         {% endfor %}
 
 </div>

@@ -1,14 +1,11 @@
 from flask import (
     Blueprint,
-    session,
     redirect,
     url_for,
     render_template,
-    flash,
-    request,
-    make_response,
+    flash
 )
-from app.models import ALLOWED_EXTENSIONS, app, Users, db, Questionnaire
+from app.models import app, Users, db, Questionnaire
 from flask_login import (
     LoginManager,
     UserMixin,
@@ -17,12 +14,9 @@ from flask_login import (
     login_required,
     current_user,
 )
-from flask import send_file
-from flask import send_from_directory
-from werkzeug.utils import secure_filename
 import os
 import shutil
-from PIL import Image
+
 
 delete_user = Blueprint("delete_user", __name__)
 
@@ -69,7 +63,6 @@ def delete():
         return redirect(url_for("profile.profile_of_user"))
 
 
-    
 @delete_user.route("/confirm_to_delete_user")
 @login_required
 def confirm_to_delete():

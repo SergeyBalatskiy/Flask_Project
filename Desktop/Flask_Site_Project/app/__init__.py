@@ -15,6 +15,7 @@ from app.routes.delete_profile import delete_profile
 from app.routes.delete_user import delete_user
 from app.routes.admin import admin_security
 
+# Инициализация блюпринтов
 app.register_blueprint(main_bp, url_prefix = "/")
 app.register_blueprint(registration_bp, url_prefix = "/create_user")
 app.register_blueprint(profile, url_prefix = "/profile")
@@ -27,14 +28,19 @@ app.register_blueprint(delete_profile, url_for= "/delete")
 app.register_blueprint(delete_user, url_prefix = "/delete_user")
 app.register_blueprint(admin_security, url_prefix = "/admin")
 
+# Создание в БД при инициализации Админа 
 with app.app_context():
+
+    # Запрос на существование админа
     q = db.session.query(Users).filter(Users.type_of_user == "admin")
 
+    # Он есть?
     if db.session.query(q.exists()).scalar():
         print("Пользователь уже зарегистрирован!")
+
     else:
+
         try:
-                
             conn = sqlite3.connect("C:/Users/OS/Desktop/Flask_Site_Project/app/database/users.db")
             cursor = conn.cursor()
 

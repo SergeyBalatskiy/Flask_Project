@@ -23,6 +23,8 @@
             <span class="logo"></span>
             <nav>
                 <ul>
+                    <!-- Логика для головы сайта -->
+                    <!-- Зарегистрирован? -->
                     {% if current_user.is_authenticated %}
                     <li class="active"><a href="{{ url_for('main_page.main')}}">Главная</a></li>
                     <li><a href="{{ url_for('profile.profile_of_user') }}" class="btn btn-info">Профиль</a></li>

@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, session, redirect, url_for, flash
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import check_password_hash
 from app.models import Users
 from flask_login import (
     LoginManager,
@@ -13,7 +13,6 @@ from app.forms import LoginForm
 
 authenitication = Blueprint("authenitication", __name__)
 
-
 @authenitication.route("/login", methods=["POST", "GET"])
 def auth():
 
@@ -24,12 +23,15 @@ def auth():
     form = LoginForm()
 
     if form.validate_on_submit():
+
         mail_auth = form.email.data
         password_hash_auth = form.password.data
         rm = form.remember.data
         user = Users.query.filter_by(mail=mail_auth).first()
 
+        # Проверка на хеш-пароль соответствие
         if user and check_password_hash(user.password_hash, password_hash_auth):
+
             login_user(user, remember=rm)
  
             if not rm:

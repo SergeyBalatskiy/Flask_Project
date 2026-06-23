@@ -1,14 +1,11 @@
 from flask import (
     Blueprint,
-    session,
     redirect,
     url_for,
     render_template,
-    flash,
-    request,
-    make_response,
+    flash
 )
-from app.models import ALLOWED_EXTENSIONS, app, Users, db, Questionnaire
+from app.models import app, db, Questionnaire
 from flask_login import (
     LoginManager,
     UserMixin,
@@ -17,25 +14,22 @@ from flask_login import (
     login_required,
     current_user,
 )
-from flask import send_file
-from flask import send_from_directory
-from werkzeug.utils import secure_filename
 import os
 import shutil
-from PIL import Image
 
 delete_profile = Blueprint("delete_profile", __name__)
 
+# Удаление пользователя
 @delete_profile.route("/delete_profile")
 @login_required
 def delete_quest():
 
+    # Получение обьекта на удаление
     quest_to_delete = Questionnaire.query.get(current_user.id)
 
     if quest_to_delete:
 
         try:
-
             upload_path = os.path.join(app.config["UPLOAD_FOLDER_TARGET_BODY"], str(current_user.id))
             try:
                 shutil.rmtree(upload_path)
@@ -61,5 +55,4 @@ def delete_quest():
 @delete_profile.route("/confirm_to_delete")
 @login_required
 def confirm_to_delete():
-
     return render_template("confirm_to_delete.html")

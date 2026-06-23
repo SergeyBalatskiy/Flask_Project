@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, request, session, redirect, url_for, flash
-from app.models import Users, db, Questionnaire, app
+from flask import Blueprint, render_template, redirect, url_for, flash
+from app.models import db, Questionnaire, app
 from flask_login import (
     LoginManager,
     UserMixin,
@@ -20,9 +20,14 @@ edit_pr = Blueprint("edit_pr", __name__)
 @login_required
 def edit_profile():
 
+    # Запрос на обьект
     quest = Questionnaire.query.filter_by(id_of_user=current_user.id).first()
     
+    # Если есть обьект
     if quest:
+        # Подготовка к инициализации AddProfile с уже введенными данными
+        # AddProfile(obj = quest) - ВАЖНО! без этого данные ранее
+        # введенные тогда не будут показаны
         form = AddProfile(obj = quest)
         form.submit.label.text = "Обновить анкету"
     else:
@@ -32,6 +37,7 @@ def edit_profile():
 
         real_files = []
 
+        # Проверка на загрузку фото
         for f in form.photo_of_target_body.data:
             if f and f.filename:
                 real_files.append(f)
@@ -50,8 +56,10 @@ def edit_profile():
 
         files_filenames = []
 
+        # Если конечная проверка показала новую загрузку фото:
         if real_files:
 
+            # Удаление всех фото существующих
             image_names = os.listdir(f"app/photo_of_target_body/{current_user.id}")
             for i in image_names:
                 os.remove(os.path.join(upload_path, i))
@@ -63,6 +71,7 @@ def edit_profile():
                 flash("Возникла непредвиденная ошибка при попытке сохранения фото.", category="error")
                 return render_template("profile_edit.html", form=form)
             
+            # Сохранение фото
             for file in real_files:
                 file_filename = secure_filename(file.filename)
                 file_path = os.path.join(upload_path, file_filename)
@@ -78,7 +87,8 @@ def edit_profile():
                 return render_template("profile.show_profile_user")
             else:
                 photos_lst = ", ".join(files_filenames)
-        
+
+        # Если фото не были затронуты:
         else:
             photos_lst = quest.photo_of_target_body
 
@@ -94,8 +104,6 @@ def edit_profile():
         quest.health_problems = form.health_problems.data
         quest.Report = form.Report.data
         quest.user_date = datetime.now()
-
-        print(datetime.utcnow())
 
         try:
             db.session.commit()

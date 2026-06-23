@@ -11,11 +11,13 @@
         <div class="profile-layout">
             <div class="photo">
                 <div class="profile-ava">
+                    <!-- Загрузка текущего аватара пользователя -->
                     <img src="{{url_for('profile.show_avatar')}}" alt="Аватар">
                 </div>
             </div>
 
             <div class="inform">
+                <!-- Флеш сообщение -->
                 {% for cat, msg in get_flashed_messages(True) %}
                 <div class="flash {{cat}}">{{msg}}</div>
                 {% endfor %}
@@ -27,6 +29,7 @@
                 <p><span class="orange-text-profile">Дата регистрации аккаунта:</span>
                     {{current_user.date.strftime("%d.%m.%Y")}}</p>
 
+                <!-- Логика для ЗАГРУЗКИ нового фото -->
                 <form action="{{url_for('profile.upload_avatar')}}" method="POST" enctype="multipart/form-data">
                     <div class="form-actions">
                         <input type="file" name="file">
@@ -38,6 +41,9 @@
 
             </div>
         </div>
+
+        <!-- Отображение анкеты если она существует -->
+        <!-- info_quest = info.pr -->
         {% if current_user.id == quest_list.id_of_user %}
         <div class="box-quest">
 
@@ -62,6 +68,7 @@
         </div>
 
         {% else %}
+        <!-- Для администратора -->
         {% if current_user.type_of_user == "admin" %}
         <div class="buttons-wth-quest">
             <a href='{{url_for("admin.show_questionaires")}}' class="btn">Просмотреть анкеты</a>

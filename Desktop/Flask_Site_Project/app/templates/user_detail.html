@@ -24,6 +24,8 @@
                 <div class="photo-quest">
                     <div class="profile-quest">
 
+                        <!-- Загрузка фото пользователя для админа -->
+
                         {% for image_name in image_names %}
 
                         <img src="{{ url_for('admin.show_photo_body', user_id = info.id, filename=image_name) }}"

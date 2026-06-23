@@ -13,7 +13,10 @@
         {% endfor %}
 
         <form action="" method="post" novalidate class="form-contact">
+            <!-- Для безопасности -->
             {{ form.hidden_tag() }}
+
+            <!-- Передача от forms.py для регистрации (от класса RegisterForm) -->
             {% for field in form if field.name not in ['csrf_token', 'submit'] -%}
             <p>{{ field.label() }}</p>
             {% if field.errors %}
