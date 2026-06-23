@@ -34,9 +34,7 @@ def show_questionaires():
         print(find_user)
 
         try:
-            query = db.session.query(Users)
-            query = query.filter(Users.name.startswith(f'{find_user}'))
-            info = query.all()
+            info = db.session.query(Users).filter(Users.name.ilike(f'%{find_user}%')).all()
             print(info)
             return render_template("admin_quest.html", list = info)
         except Exception as e:

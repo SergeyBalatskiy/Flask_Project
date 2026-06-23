@@ -60,6 +60,15 @@ def show_photo_body(filename):
     
     return send_file(full_path, mimetype='image/jpeg')
 
+@profile.route('/show_example_body/<filename>')
+def show_example_body(filename):
+
+    base_path = app.config["UPLOAD_FOLDER_TARGET_BODY"]  
+    full_path = os.path.join(base_path, "example-body", filename)
+    
+    return send_file(full_path, mimetype='image/jpeg')
+
+
 @profile.route("/show_avatar")
 @login_required
 def show_avatar():

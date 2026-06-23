@@ -40,6 +40,15 @@ body.auth-bg {
     height: 100vh;
 }
 
+.information-bg {
+    background-image: url('/static/img_for_site/information.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    overflow: hidden;
+    height: 100vh;
+}
+
 body.registration-bg {
     background-image: url('/static/img_for_site/registration.jpg');
     background-size: cover;
@@ -990,7 +999,7 @@ body.example-bg {
     padding: 60px;
     border-radius: 20px;
     border: 3px solid rgb(255, 136, 0);
-    width: 570px;
+    width: 470px;
     max-width: 100%;
 }
 
@@ -1114,6 +1123,7 @@ body.example-bg {
 }
 
 .body-quest .btn {
+    margin-left: auto;
     display: inline-block;
     padding: 14px 23px;
     background: #dc7000;
@@ -1136,15 +1146,106 @@ body.example-bg {
 
 .body-quest {
     display: flex;
-    justify-content: space-between;
-    flex-direction: row;
+    flex-grow: 1;
     background: rgba(0, 0, 0, 0.75);
     padding: 30px;
     border-radius: 20px;
     border: 3px solid rgb(255, 136, 0);
     position: relative;
+    justify-content: space-between;
 }
 
 .inform_quest {
     padding: 15px;
+    display: flex;
+    max-width: 100%;
+}
+
+.body-quest p {
+    flex: 1
+}
+
+.form-control {
+    width: 16%;
+    margin-right: 10px;
+    margin-left: 17px;
+    padding: 12px 15px;
+    border: 2px solid #DC7000;
+    background: #3a3a3a;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.btn-btn-success {
+    padding-left: -20px;
+    background: #DC7000;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 20px;
+    padding: 14px 43px;
+    border: 0;
+    cursor: pointer;
+    transition: all 500ms ease;
+}
+
+.admin--quest {
+    padding-top: 20px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 20px;
+
+}
+
+.find-quest {
+    justify-content: flex-start;
+    display: flex;
+}
+
+.btn-btn-success:hover {
+    background: #9d3904;
+    transform: scale(1.02);
+}
+
+.informations {
+    flex-grow: 1;
+    background: rgba(0, 0, 0, 0.75);
+    padding: 30px;
+    border-radius: 20px;
+    border: 3px solid rgb(255, 136, 0);
+}
+
+.informations h1 {
+    text-align: center;
+    padding-bottom: 30px;
+    padding-top: 7px;
+}
+
+.informations p,
+.informations li,
+.informations div,
+.informations span {
+    text-align: justify;
+    font-size: 20px;
+    line-height: 1.2;
+    padding-bottom: 30px;
+}
+
+.big-div {
+    padding-top: 30px;
+}
+
+.informations .orange-text {
+    color: #ec7e00;
+    font-weight: 600;
+}
+
+.show-ex {
+    color: #ec7e00;
+    font-weight: 600;
+    font-size: 20px;
 }

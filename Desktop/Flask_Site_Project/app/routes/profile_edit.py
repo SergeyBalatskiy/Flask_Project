@@ -48,31 +48,39 @@ def edit_profile():
 
         upload_path = os.path.join(app.config["UPLOAD_FOLDER_TARGET_BODY"], str(current_user.id))
 
-        try:
-            os.makedirs(upload_path, exist_ok=True)
-        except Exception as e:
-            print(e)
-            flash("Возникла непредвиденная ошибка при попытке сохранения фото.", category="error")
-            return render_template("profile_edit.html", form=form)
-
-        image_names = os.listdir(f"app/photo_of_target_body/{current_user.id}")
-        for i in image_names:
-            os.remove(os.path.join(upload_path, i))
-
         files_filenames = []
 
-        for file in real_files:
-            file_filename = secure_filename(file.filename)
-            file_path = os.path.join(upload_path, file_filename)
+        if real_files:
+
+            image_names = os.listdir(f"app/photo_of_target_body/{current_user.id}")
+            for i in image_names:
+                os.remove(os.path.join(upload_path, i))
+
             try:
-                file.save(file_path)
-            except:
-                flash("Обнаружен пустой файл", category="error")
-                return render_template("profile_edit.html", form = form)
+                os.makedirs(upload_path, exist_ok=True)
+            except Exception as e:
+                print(e)
+                flash("Возникла непредвиденная ошибка при попытке сохранения фото.", category="error")
+                return render_template("profile_edit.html", form=form)
             
-            files_filenames.append(file_filename)
+            for file in real_files:
+                file_filename = secure_filename(file.filename)
+                file_path = os.path.join(upload_path, file_filename)
+                try:
+                    file.save(file_path)
+                    files_filenames.append(file_filename)
+                except:
+                    flash("Обнаружен пустой файл", category="error")
+                    return render_template("profile_edit.html", form = form)
+
+            if not files_filenames:
+                flash("Не удалось сохранить ни одно фото.", category="error")
+                return render_template("profile.show_profile_user")
+            else:
+                photos_lst = ", ".join(files_filenames)
         
-        photos_lst = ", ".join(files_filenames)
+        else:
+            photos_lst = quest.photo_of_target_body
 
         quest.age = form.age.data
         quest.gender = form.gender.data

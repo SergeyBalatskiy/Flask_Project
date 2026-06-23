@@ -7,8 +7,11 @@
 <div class="admin--quest">
 
     <form method="post">
-        <input type="text" name="find_user" id="find_user" class="form-control" placeholder="Найти пользователя..."><br>
-        <input type="submit" class="btn btn-success" value="Отправить!">
+        <div class="find-quest">
+            <input type="text" name="find_user" id="find_user" class="form-control"
+                placeholder="Найти пользователя..."><br>
+            <input type="submit" class="btn-btn-success" value="Поиск">
+        </div>
 
         {% for u in list %}
 
