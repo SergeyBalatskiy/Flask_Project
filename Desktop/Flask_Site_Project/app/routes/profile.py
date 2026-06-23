@@ -82,8 +82,6 @@ def show_avatar():
 @login_required
 def upload_avatar():
 
-    print("😀ФУНКЦИЯ ВЫЗВАЛАСЬ!")
-
     if request.method == "POST":
 
         if "file" not in request.files:

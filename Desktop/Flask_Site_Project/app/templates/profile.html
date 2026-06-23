@@ -62,9 +62,15 @@
         </div>
 
         {% else %}
+        {% if current_user.type_of_user == "admin" %}
+        <div class="buttons-wth-quest">
+            <a href='{{url_for("admin.show_questionaires")}}' class="btn">Просмотреть анкеты</a>
+        </div>
+        {% else %}
         <div class="buttons-wth-quest">
             <a href='{{url_for("create_profile.create_profile") }}' class="btn">У вас нет анкеты. Создать анкету?</a>
         </div>
+        {% endif %}
         {% endif %}
     </div>
 </div>

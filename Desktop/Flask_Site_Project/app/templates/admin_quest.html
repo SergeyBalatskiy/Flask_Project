@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block body_class %}admin-quest-bg{% endblock %}
+
+{% block body %}
+
+<div class="admin--quest">
+
+    <form method="post">
+        <input type="text" name="find_user" id="find_user" class="form-control" placeholder="Найти пользователя..."><br>
+        <input type="submit" class="btn btn-success" value="Отправить!">
+
+        {% for u in list %}
+
+        {% if u.pr %}
+
+        <div class="inform_quest">
+
+            <div class="body-quest">
+                <p><span class="orange-text-profile">Имя:</span> {{u.name}}</p>
+                <p><span class="orange-text-profile">Фамилия:</span> {{u.surname}}</p>
+                <p><span class="orange-text-profile">Почта:</span> {{u.mail}}</p>
+                <p><span class="orange-text-profile">Телефон:</span> {{u.phone}}</p>
+                <a href="/admin/user_detail/{{u.id}}" class="btn">Подробнее</a>
+            </div>
+
+        </div>
+
+        {% endif %}
+
+        {% endfor %}
+
+</div>
+
+{% endblock %}

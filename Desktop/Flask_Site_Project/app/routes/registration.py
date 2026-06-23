@@ -10,7 +10,6 @@ from flask_login import (
     current_user,
 )
 from app.forms import RegisterForm
-from sqlalchemy import exists
 
 registration_bp = Blueprint("registration", __name__)
 

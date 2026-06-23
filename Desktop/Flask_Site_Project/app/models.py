@@ -66,7 +66,7 @@ class Users(UserMixin, db.Model):
     phone = db.Column(db.String(100), nullable=False)
     type_of_user = db.Column(db.String(10), default="user")
     avatar = db.Column(db.String(50), default="default.png")
-    date = db.Column(db.DateTime, default=datetime.utcnow)
+    date = db.Column(db.DateTime, default=datetime.now)
 
     pr = db.relationship("Questionnaire", backref = "users", uselist = False)
 
