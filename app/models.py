@@ -5,22 +5,24 @@ from flask import Flask, render_template, url_for, flash,redirect
 from flask_login import LoginManager
 from flask_login import UserMixin
 from werkzeug.exceptions import RequestEntityTooLarge
+import os
 
 
 app = Flask(__name__)
 
 # Путь БД
+basedir = os.path.abspath(os.path.dirname(__file__))
 app.config["SQLALCHEMY_DATABASE_URI"] = (
-    "Flask_Site_Project/app/database/users.db"
+    "sqlite:///" + os.path.join(basedir, "database", "users.db")
 )
 app.config["SECRET_KEY"] = "05a8fe372941bef498a572c53b6aa1df1c8d3e27"
 app.config["SESSION_PERMANENT"] = False
 app.config["REMEMBER_COOKIE_DURATION"] = timedelta(days=2)
 app.config["UPLOAD_FOLDER"] = (
-    r"C:\Users\OS\Desktop\Flask_Site_Project\app\avatars_of_users"
+    os.path.join(basedir, "avatars_of_users")
 )
 app.config["UPLOAD_FOLDER_TARGET_BODY"] = (
-    r"C:\Users\OS\Desktop\Flask_Site_Project\app\photo_of_target_body"
+    os.path.join(basedir, "photo_of_target_body")
 )
 
 # Ограничение на макс размер в 2 МБ
@@ -45,11 +47,6 @@ login_manager.init_app(app)
 login_manager.login_view = "authenitication.auth"
 login_manager.login_message = "Авторизируйтесь для доступа к закрытым страницам"
 login_manager.login_message_category = "warning"
-
-# Логин загрузки пользователя
-@login_manager.user_loader
-def load_user(user_id):
-    return Users.query.get(int(user_id))
 
 # Обработчик с защитами от различных атак
 @app.after_request
@@ -96,6 +93,11 @@ class Users(UserMixin, db.Model):
 
         return "<Article %r>" % self.id
 
+# Логин загрузки пользователя
+@login_manager.user_loader
+def load_user(user_id):
+    return Users.query.get(int(user_id))
+
 # БД для анкеты
 class Questionnaire(db.Model):
     id_of_user = db.Column(db.Integer, ForeignKey('users.id'))
@@ -116,4 +118,4 @@ class Questionnaire(db.Model):
     # Упаковка в обьект айдишника
     def __repr__(self):
 
-        return "<Article %r>" % self.id
+        return "<Article %r>" % self.pr_key

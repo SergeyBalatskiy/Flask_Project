@@ -60,7 +60,7 @@ def edit_profile():
         if real_files:
 
             # Удаление всех фото существующих
-            image_names = os.listdir(f"app/photo_of_target_body/{current_user.id}")
+            image_names = os.listdir(os.path.join(app.config["UPLOAD_FOLDER_TARGET_BODY"], str(current_user.id)))
             for i in image_names:
                 os.remove(os.path.join(upload_path, i))
 

@@ -42,7 +42,7 @@ def show_profile_user():
         info = Users.query.get(current_user.id)
         info_quest = info.pr
         # Запрос на копирование всех названий фото
-        image_names = os.listdir(f"app/photo_of_target_body/{current_user.id}")
+        image_names = os.listdir(os.path.join(app.config["UPLOAD_FOLDER_TARGET_BODY"], str(current_user.id)))
         return render_template("show_profile.html", info = info, info_quest = info_quest, image_names = image_names)   
     except Exception as e:
         return f"{e}"
@@ -202,7 +202,7 @@ def load_image():
 
     if current_user.avatar == "default.png":
         try:
-            with app.open_resource(r"avatars_of_users/default.png", "rb") as f:
+            with open(os.path.join(app.config["UPLOAD_FOLDER"], "default.png"), "rb") as f:
                 img = f.read()
         except Exception as e:
             print("Возника ошибка:", e)
@@ -210,7 +210,7 @@ def load_image():
     else:
         name = current_user.avatar
         try:
-            with app.open_resource(f"avatars_of_users/{name}", "rb") as f:
+            with open(os.path.join(app.config["UPLOAD_FOLDER"], name), "rb") as f:
                 img = f.read()
         except Exception as e:
             print("Возника ошибка:", e)

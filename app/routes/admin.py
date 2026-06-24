@@ -57,7 +57,7 @@ def show_quest(u):
     try:
         info = Users.query.get(u)
         info_quest = info.pr
-        image_names = os.listdir(f"app/photo_of_target_body/{u}")
+        image_names = os.listdir(os.path.join(app.config["UPLOAD_FOLDER_TARGET_BODY"], str(u)))
 
         return render_template("user_detail.html", info = info, info_quest = info_quest, image_names = image_names)   
     except Exception as e:

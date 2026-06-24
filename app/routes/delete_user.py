@@ -25,7 +25,7 @@ delete_user = Blueprint("delete_user", __name__)
 def delete():
     
     #Удаляется анкета с фото тела
-    quest_to_delete = Questionnaire.query.get(current_user.id)
+    quest_to_delete = Questionnaire.query.filter_by(id_of_user=current_user.id).first()
     if quest_to_delete:
         try:
             upload_path = os.path.join(app.config["UPLOAD_FOLDER_TARGET_BODY"], str(current_user.id))

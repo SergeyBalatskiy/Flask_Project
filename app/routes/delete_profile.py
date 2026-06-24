@@ -19,13 +19,14 @@ import shutil
 
 delete_profile = Blueprint("delete_profile", __name__)
 
-# Удаление пользователя
 @delete_profile.route("/delete_profile")
 @login_required
 def delete_quest():
 
     # Получение обьекта на удаление
-    quest_to_delete = Questionnaire.query.get(current_user.id)
+    quest_to_delete = Questionnaire.query.filter_by(id_of_user=current_user.id).first()
+
+    print(quest_to_delete)
 
     if quest_to_delete:
 

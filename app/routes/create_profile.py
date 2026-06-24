@@ -24,6 +24,7 @@ def create_profile():
     quest = Questionnaire.query.filter_by(id_of_user=current_user.id).first()
 
     if quest:
+        print(quest)
         flash("У вас уже есть анкета!", category="success")
         return redirect(url_for("profile.show_profile_user"))
     
