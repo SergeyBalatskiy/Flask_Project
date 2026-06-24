@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block body_class %}pr-bg{% endblock %}
+
+{% block body %}
+
+<div class="profile--info">
+    <div class="box">
+        <h1>Ваш профиль:</h1>
+
+        <div class="profile-layout">
+            <div class="photo">
+                <div class="profile-ava">
+                    <!-- Загрузка текущего аватара пользователя -->
+                    <img src="{{url_for('profile.show_avatar')}}" alt="Аватар">
+                </div>
+            </div>
+
+            <div class="inform">
+                <!-- Флеш сообщение -->
+                {% for cat, msg in get_flashed_messages(True) %}
+                <div class="flash {{cat}}">{{msg}}</div>
+                {% endfor %}
+
+                <p><span class="orange-text-profile">Имя:</span> {{current_user.name}}</p>
+                <p><span class="orange-text-profile">Фамилия:</span> {{current_user.surname}}</p>
+                <p><span class="orange-text-profile">Почта:</span> {{current_user.mail}}</p>
+                <p><span class="orange-text-profile">Телефон:</span> {{current_user.phone}}</p>
+                <p><span class="orange-text-profile">Дата регистрации аккаунта:</span>
+                    {{current_user.date.strftime("%d.%m.%Y")}}</p>
+
+                <!-- Логика для ЗАГРУЗКИ нового фото -->
+                <form action="{{url_for('profile.upload_avatar')}}" method="POST" enctype="multipart/form-data">
+                    <div class="form-actions">
+                        <input type="file" name="file">
+                        <input type="submit" value="Загрузить новый аватар">
+                        <a href='{{url_for("delete_user.confirm_to_delete") }}' class="btn btn-danger">Удалить
+                            аккаунт</a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <!-- Отображение анкеты если она существует -->
+        <!-- info_quest = info.pr -->
+        {% if current_user.id == quest_list.id_of_user %}
+        <div class="box-quest">
+
+            <h1>Ваша анкета:</h1>
+
+            <div class="show-quest">
+                <div class="data">
+                    <p><span class="orange-text-profile">Пол:</span> {{quest_list.gender}}</p>
+                    <p><span class="orange-text-profile">Рост:</span> {{quest_list.height}}</p>
+                    <p><span class="orange-text-profile">Активность в течение дня:</span>
+                        {{quest_list.active_in_the_day}}
+                    </p>
+                    <p><span class="orange-text-profile">Комментарий:</span> {{quest_list.Report}}</p>
+                    <p>...</p>
+                </div>
+                <div class="buttons">
+                    <a href="{{url_for('delete_profile.confirm_to_delete')}}" class="btn-danger">Удалить анкету</a>
+                    <a href='{{url_for("edit_pr.edit_profile") }}' class="btn">Редактировать анкету</a>
+                    <a href='{{url_for("profile.show_profile_user") }}' class="btn">Смотреть анкету</a>
+                </div>
+            </div>
+        </div>
+
+        {% else %}
+        <!-- Для администратора -->
+        {% if current_user.type_of_user == "admin" %}
+        <div class="buttons-wth-quest">
+            <a href='{{url_for("admin.show_questionaires")}}' class="btn">Просмотреть анкеты</a>
+        </div>
+        {% else %}
+        <div class="buttons-wth-quest">
+            <a href='{{url_for("create_profile.create_profile") }}' class="btn">У вас нет анкеты. Создать анкету?</a>
+        </div>
+        {% endif %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block body_class %}auth-bg{% endblock %}
+
+{% block body %}
+
+<div class="auth">
+    <div class="auth--info">
+        <h1>Вход в аккаунт</h1>
+        {% for cat, msg in get_flashed_messages(True) %}
+        <div class="flash {{cat}}">{{msg}}</div>
+        {% endfor %}
+
+        <form action="" method="post" novalidate class="form-contact">
+
+            {{ form.hidden_tag() }}
+            <!-- Логика аутентификации берется из  LoginForm (forms.py)-->
+            {% for field in form if field.name not in ['csrf_token', 'remember', 'submit'] -%}
+            <p>{{ field.label() }}</p>
+            {% if field.errors %}
+            {{ field(class="invalid") }}
+            <span class="invalid-feedback">
+                {% for e in field.errors %}
+                {{ e }}
+                {% endfor %}
+            </span>
+            {% else %}
+            {{ field() }}
+            {% endif %}
+            {% endfor %}
+
+            <p>{{ form.remember() }} {{ form.remember.label() }}</p>
+
+            <p>{{ form.submit(class = "btn btn-success") }}</p>
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}

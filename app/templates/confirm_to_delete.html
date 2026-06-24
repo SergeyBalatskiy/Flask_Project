@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block body_class %}confirm-bg{% endblock %}
+
+{% block body %}
+
+<div class="delete--info">
+    <div class="div-delete">
+        <h1>Вы действительно хотите удалить анкету?</h1>
+        <a href='{{url_for("delete_profile.delete_quest") }}' class="btn-danger">Удалить</a>
+        <a href='{{url_for("profile.profile_of_user") }}' class="btn-cancell">Отмена</a>
+    </div>
+</div>
+
+{% endblock %}

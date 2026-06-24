@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block body_class %}example-bg{% endblock %}
+
+{% block body %}
+
+{% set image_names = ['target-body-ex.jpg', 'example-body.jpg'] %}
+
+<div class="exampl">
+    <div class="exampl--info">
+        <h1>Шаблон анкеты:</h1>
+        <p><span class="orange-text">Имя:</span> Игорь</p>
+        <p><span class="orange-text">Фамилия:</span> Балакирев</p>
+        <p><span class="orange-text">Возраст:</span> 19 лет</p>
+        <p><span class="orange-text">Пол:</span> Мужской</p>
+        <p><span class="orange-text">Рост:</span> 185 см</p>
+        <p><span class="orange-text">Вес:</span> 80.6</p>
+        <p><span class="orange-text">Целевой вес:</span> 76.6</p>
+        <p><span class="orange-text">Цель тренировок:</span> Убрать подкожный жир</p>
+        <p><span class="orange-text">Опыт тренировок:</span> 7 лет</p>
+        <p><span class="orange-text">Активность в течение дня:</span> Высокая</p>
+        <p><span class="orange-text">Фото и уровень жира (текущая и желаемая форма):</span></p>
+        <div class="photo-quest">
+            <div class="profile-quest">
+
+                {% for image_name in image_names %}
+
+                <img src="{{ url_for('profile.show_example_body', filename=image_name) }}" alt="Фото" class="src">
+
+                {% endfor %}
+
+            </div>
+        </div>
+        <p><span class="orange-text">Проблемы со здоровьем:</span> Травма ахила</p>
+        <p><span class="orange-text">Комментарий:</span></p>
+    </div>
+</div>
+
+{% endblock %}

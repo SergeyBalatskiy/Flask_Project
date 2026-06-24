@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block body_class %}registration-bg{% endblock %}
+
+{% block body %}
+
+<div class="exampl">
+
+    <div class="exampl--info">
+        <ul>
+            <li>
+                <p><span class="orange-text-quest">Имя:</span> {{info.name}}</p>
+                <p><span class="orange-text-quest">Фамилия:</span> {{info.surname}}</p>
+                <p><span class="orange-text-quest">Возраст:</span> {{info_quest.age}}</p>
+                <p><span class="orange-text-quest">Пол:</span> {{info_quest.gender}}</p>
+                <p><span class="orange-text-quest">Рост:</span> {{info_quest.height}}</p>
+                <p><span class="orange-text-quest">Вес:</span> {{info_quest.weight}}</p>
+                <p><span class="orange-text-quest">Целевой вес:</span> {{info_quest.target_weight}}</p>
+                <p><span class="orange-text-quest">Цель тренировок:</span> {{info_quest.target_of_training}}</p>
+                <p><span class="orange-text-quest">Опыт тренировок:</span> {{info_quest.experience_of_training}}</p>
+
+                <p><span class="orange-text-quest">Активность в течение дня:</span> {{info_quest.active_in_the_day}}</p>
+                <p><span class="orange-text-quest">Фото и уровень жира(желаемая и текущая форма):</span>
+                <div class="photo-quest">
+                    <div class="profile-quest">
+
+                        <!-- Загрузка фото пользователя для админа -->
+
+                        {% for image_name in image_names %}
+
+                        <img src="{{ url_for('admin.show_photo_body', user_id = info.id, filename=image_name) }}"
+                            alt="Фото" class="src">
+
+                        {% endfor %}
+
+                    </div>
+                </div>
+                </p>
+                <p><span class="orange-text-quest">Проблемы со здоровьем:</span> {{info_quest.health_problems}}</p>
+                <p><span class="orange-text-quest">Комментарий:</span> {{info_quest.Report}}</p>
+                <p><span class="orange-text-quest">Дата создания/редактирования анкеты:</span>
+                    {{info_quest.user_date.strftime("%d.%m.%y, %H:%M")}}</p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

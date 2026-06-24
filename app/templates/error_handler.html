@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block body_class %}error-bg{% endblock %}
+
+{% block body %}
+
+<body>
+    <div class="error-div">
+        <div class="error-container">
+            <div class="error-message">По вашему запросу ничего не найдено!</div>
+            <div class="error-description">
+                Возможно, страница была удалена, перемещена или вы указали неверный адрес.
+            </div>
+            <div class="center-a">
+                <a href="/" class="home-button">Вернуться на главную</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+{% endblock %}

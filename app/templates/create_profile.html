@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block body_class %}create-bg{% endblock %}
+
+{% block body %}
+<div class="wrapper_quest">
+    <div class="create--quest">
+        <h1>Создание анкеты</h1>
+
+        {% for cat, msg in get_flashed_messages(True) %}
+        <div class="flash {{cat}}">{{msg}}</div>
+        {% endfor %}
+        
+        <div class="div-quest">
+
+            <form action="" method="POST" novalidate class="form-contact" enctype="multipart/form-data">
+
+                {{ form.hidden_tag() }}
+
+                {% for field in form if field.name not in ['csrf_token', 'remember', 'submit'] -%}
+                <p>{{ field.label() }}</p>
+                {% if field.errors %}
+                {{ field(class="invalid") }}
+                <span class="invalid-feedback">
+                    {% for e in field.errors %}
+                    {{ e }}
+                    {% endfor %}
+                </span>
+                {% else %}
+                {{ field() }}
+                {% endif %}
+                {% endfor %}
+
+                <p>{{ form.submit(class = "btn btn-success") }}
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

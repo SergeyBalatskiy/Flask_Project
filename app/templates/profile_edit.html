@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block body_class %}edit{% endblock %}
+
+{% block body %}
+
+<div class="edit--info">
+    <div class="questionaire">
+
+        <form action="" method="POST" novalidate class="form-contact" enctype="multipart/form-data">
+
+            <h1>Редактирование анкеты</h1>
+            {% for cat, msg in get_flashed_messages(True) %}
+            <div class="flash {{cat}}">{{msg}}</div>
+            {% endfor %}
+            {{ form.hidden_tag() }}
+            {% for field in form if field.name not in ['csrf_token', 'remember', 'submit'] -%}
+            <p>{{ field.label() }}</p>
+            {% if field.errors %}
+            {{ field(class="invalid") }}
+            <span class="invalid-feedback">
+                {% for e in field.errors %}
+                {{ e }}
+                {% endfor %}
+            </span>
+            {% else %}
+            {{ field() }}
+            {% endif %}
+            {% endfor %}
+
+            <p>{{ form.submit(class = "btn btn-success") }}
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}
