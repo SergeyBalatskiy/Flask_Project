@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 # Путь БД
 app.config["SQLALCHEMY_DATABASE_URI"] = (
-    "sqlite:///C:/Users/OS/Desktop/Flask_Site_Project/app/database/users.db"
+    "Flask_Site_Project/app/database/users.db"
 )
 app.config["SECRET_KEY"] = "05a8fe372941bef498a572c53b6aa1df1c8d3e27"
 app.config["SESSION_PERMANENT"] = False
